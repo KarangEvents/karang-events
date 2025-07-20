@@ -57,7 +57,7 @@ const config = {
         purple: {
           light: "#D8CCF6",
           DEFAULT: "#9F7AEA",
-          dark: "#6B46C1",
+          dark: "#32174D",
         },
         gold: {
           light: "#F6E3A3",

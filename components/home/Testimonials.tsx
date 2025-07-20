@@ -32,7 +32,7 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="section-padding gradient-purple text-white container">
+    <section className="section-padding  container bg-purple-dark text-white">
       <div className="container-custom">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

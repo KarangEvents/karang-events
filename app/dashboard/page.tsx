@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Clock, MapPin, Star } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar, Clock, MapPin, Star } from "lucide-react";
 
 // Sample data for upcoming bookings
 const upcomingBookings = [
@@ -28,7 +28,7 @@ const upcomingBookings = [
     location: "Convention Center, San Francisco",
     status: "Pending",
   },
-]
+];
 
 // Sample data for past events
 const pastEvents = [
@@ -48,7 +48,7 @@ const pastEvents = [
     location: "Luxury Hotel, Chicago",
     rating: 4.5,
   },
-]
+];
 
 // Sample data for favorite events
 const favoriteEvents = [
@@ -68,7 +68,7 @@ const favoriteEvents = [
     location: "Rooftop Restaurant, Seattle",
     price: "$1,800",
   },
-]
+];
 
 // Sample data for recommended events
 const recommendedEvents = [
@@ -99,26 +99,34 @@ const recommendedEvents = [
     price: "$9,500",
     rating: 4.7,
   },
-]
+];
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState("upcoming")
+  const [activeTab, setActiveTab] = useState("upcoming");
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       <div className="container px-4 md:px-6 py-8 md:py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-2">Welcome, Jessica</h1>
-            <p className="text-muted-foreground">Manage your events and bookings all in one place</p>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-2">
+              Welcome, Jessica
+            </h1>
+            <p className="text-muted-foreground">
+              Manage your events and bookings all in one place
+            </p>
           </div>
           <div className="mt-4 md:mt-0">
-            <Button className="bg-purple hover:bg-purple-dark">Browse Events</Button>
+            <Button>Browse Events</Button>
           </div>
         </div>
 
         {/* Dashboard Tabs */}
-        <Tabs defaultValue="upcoming" className="space-y-8" onValueChange={setActiveTab}>
+        <Tabs
+          defaultValue="upcoming"
+          className="space-y-8"
+          onValueChange={setActiveTab}
+        >
           <TabsList className="bg-muted/50">
             <TabsTrigger value="upcoming">Upcoming Bookings</TabsTrigger>
             <TabsTrigger value="past">Past Events</TabsTrigger>
@@ -150,7 +158,9 @@ export default function DashboardPage() {
                         >
                           {booking.status}
                         </div>
-                        <h3 className="font-serif font-bold text-lg mb-2">{booking.title}</h3>
+                        <h3 className="font-serif font-bold text-lg mb-2">
+                          {booking.title}
+                        </h3>
                         <div className="space-y-1 text-sm text-muted-foreground mb-4">
                           <div className="flex items-center">
                             <Calendar className="h-4 w-4 mr-2" />
@@ -169,7 +179,10 @@ export default function DashboardPage() {
                           <Button variant="outline" size="sm">
                             View Details
                           </Button>
-                          <Button size="sm" className="bg-purple hover:bg-purple-dark">
+                          <Button
+                            size="sm"
+                            className="bg-purple hover:bg-purple-dark"
+                          >
                             Manage
                           </Button>
                         </div>
@@ -182,11 +195,15 @@ export default function DashboardPage() {
               <Card>
                 <CardContent className="flex flex-col items-center justify-center py-12">
                   <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
-                  <h3 className="font-serif text-xl font-bold mb-2">No Upcoming Bookings</h3>
+                  <h3 className="font-serif text-xl font-bold mb-2">
+                    No Upcoming Bookings
+                  </h3>
                   <p className="text-muted-foreground text-center mb-6">
                     You don't have any upcoming events booked yet.
                   </p>
-                  <Button className="bg-purple hover:bg-purple-dark">Browse Events</Button>
+                  <Button className="bg-purple hover:bg-purple-dark">
+                    Browse Events
+                  </Button>
                 </CardContent>
               </Card>
             )}
@@ -208,7 +225,9 @@ export default function DashboardPage() {
                         />
                       </div>
                       <div className="p-4 md:p-6 md:w-2/3">
-                        <h3 className="font-serif font-bold text-lg mb-2">{event.title}</h3>
+                        <h3 className="font-serif font-bold text-lg mb-2">
+                          {event.title}
+                        </h3>
                         <div className="space-y-1 text-sm text-muted-foreground mb-4">
                           <div className="flex items-center">
                             <Calendar className="h-4 w-4 mr-2" />
@@ -227,7 +246,10 @@ export default function DashboardPage() {
                           <Button variant="outline" size="sm">
                             View Details
                           </Button>
-                          <Button size="sm" className="bg-purple hover:bg-purple-dark">
+                          <Button
+                            size="sm"
+                            className="bg-purple hover:bg-purple-dark"
+                          >
                             Leave Review
                           </Button>
                         </div>
@@ -240,9 +262,15 @@ export default function DashboardPage() {
               <Card>
                 <CardContent className="flex flex-col items-center justify-center py-12">
                   <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
-                  <h3 className="font-serif text-xl font-bold mb-2">No Past Events</h3>
-                  <p className="text-muted-foreground text-center mb-6">You haven't attended any events yet.</p>
-                  <Button className="bg-purple hover:bg-purple-dark">Browse Events</Button>
+                  <h3 className="font-serif text-xl font-bold mb-2">
+                    No Past Events
+                  </h3>
+                  <p className="text-muted-foreground text-center mb-6">
+                    You haven't attended any events yet.
+                  </p>
+                  <Button className="bg-purple hover:bg-purple-dark">
+                    Browse Events
+                  </Button>
                 </CardContent>
               </Card>
             )}
@@ -255,10 +283,17 @@ export default function DashboardPage() {
                 {favoriteEvents.map((event) => (
                   <Card key={event.id} className="overflow-hidden card-hover">
                     <div className="relative h-48 w-full">
-                      <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
+                      <Image
+                        src={event.image || "/placeholder.svg"}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
                     <CardContent className="p-4">
-                      <h3 className="font-serif font-bold text-lg mb-2">{event.title}</h3>
+                      <h3 className="font-serif font-bold text-lg mb-2">
+                        {event.title}
+                      </h3>
                       <div className="flex items-center text-sm text-muted-foreground mb-1">
                         <Calendar className="h-4 w-4 mr-1" />
                         <span>{event.date}</span>
@@ -268,8 +303,13 @@ export default function DashboardPage() {
                         <span>{event.location}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-purple-dark">{event.price}</span>
-                        <Button size="sm" className="bg-purple hover:bg-purple-dark">
+                        <span className="font-bold text-purple-dark">
+                          {event.price}
+                        </span>
+                        <Button
+                          size="sm"
+                          className="bg-purple hover:bg-purple-dark"
+                        >
                           Book Now
                         </Button>
                       </div>
@@ -281,11 +321,15 @@ export default function DashboardPage() {
               <Card>
                 <CardContent className="flex flex-col items-center justify-center py-12">
                   <Star className="h-12 w-12 text-muted-foreground mb-4" />
-                  <h3 className="font-serif text-xl font-bold mb-2">No Favorites Yet</h3>
+                  <h3 className="font-serif text-xl font-bold mb-2">
+                    No Favorites Yet
+                  </h3>
                   <p className="text-muted-foreground text-center mb-6">
                     You haven't added any events to your favorites yet.
                   </p>
-                  <Button className="bg-purple hover:bg-purple-dark">Browse Events</Button>
+                  <Button className="bg-purple hover:bg-purple-dark">
+                    Browse Events
+                  </Button>
                 </CardContent>
               </Card>
             )}
@@ -294,16 +338,25 @@ export default function DashboardPage() {
 
         {/* Recommendations Section */}
         <div className="mt-12">
-          <h2 className="font-serif text-2xl font-bold mb-6">Recommended For You</h2>
+          <h2 className="font-serif text-2xl font-bold mb-6">
+            Recommended For You
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recommendedEvents.map((event) => (
               <Link href={`/events/${event.id}`} key={event.id}>
                 <Card className="overflow-hidden card-hover">
                   <div className="relative h-48 w-full">
-                    <Image src={event.image || "/placeholder.svg"} alt={event.title} fill className="object-cover" />
+                    <Image
+                      src={event.image || "/placeholder.svg"}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-serif font-bold text-lg mb-2">{event.title}</h3>
+                    <h3 className="font-serif font-bold text-lg mb-2">
+                      {event.title}
+                    </h3>
                     <div className="flex items-center text-sm text-muted-foreground mb-1">
                       <Calendar className="h-4 w-4 mr-1" />
                       <span>{event.date}</span>
@@ -313,7 +366,9 @@ export default function DashboardPage() {
                       <span>{event.location}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-purple-dark">{event.price}</span>
+                      <span className="font-bold text-purple-dark">
+                        {event.price}
+                      </span>
                       <div className="flex items-center">
                         <Star className="h-4 w-4 text-gold fill-gold mr-1" />
                         <span className="text-sm">{event.rating}</span>
@@ -327,5 +382,5 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

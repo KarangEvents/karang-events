@@ -6,8 +6,9 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { DM_Sans } from "next/font/google";
 
-const fontSans = Young_Serif({
+const fontSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",

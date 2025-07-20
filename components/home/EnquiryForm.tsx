@@ -10,7 +10,6 @@ import {
   Form,
   FormField,
   FormItem,
-  FormLabel,
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
@@ -32,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { UserIcon, PhoneIcon } from "lucide-react";
 
 const formSchema = z.object({
   name_0444474801: z.string().min(1),
@@ -71,7 +71,12 @@ export default function EventForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Your name" {...field} className="h-14" />
+                <Input
+                  placeholder="Your name"
+                  {...field}
+                  className="h-14"
+                  icon={<UserIcon className="size-5" />}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -91,6 +96,7 @@ export default function EventForm() {
                     type="tel"
                     className="h-14"
                     {...field}
+                    icon={<PhoneIcon className="size-4" />}
                   />
                 </FormControl>
                 <FormMessage />
