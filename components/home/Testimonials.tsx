@@ -2,33 +2,7 @@ import React from "react";
 import { Card } from "../ui/card";
 import Image from "next/image";
 import { Star } from "lucide-react";
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Sarah Johnson",
-    role: "Event Organizer",
-    content:
-      "Karang Events made our corporate event seamless and memorable. Their attention to detail is unmatched.",
-    avatar: "/placeholder.svg?height=60&width=60",
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    role: "Wedding Planner",
-    content:
-      "The platform's features helped us coordinate a perfect wedding. Highly recommend for any event planning needs.",
-    avatar: "/placeholder.svg?height=60&width=60",
-  },
-  {
-    id: 3,
-    name: "Emily Rodriguez",
-    role: "Conference Manager",
-    content:
-      "Professional service and excellent support. Karang Events exceeded our expectations in every way.",
-    avatar: "/placeholder.svg?height=60&width=60",
-  },
-];
+import { TESTIMONIALS } from "@/constants";
 
 const Testimonials = () => {
   return (
@@ -44,7 +18,7 @@ const Testimonials = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {TESTIMONIALS.map((testimonial, index) => (
             <Card
               key={testimonial.id}
               className="card-modern p-8 bg-white/10 backdrop-blur-sm border-white/20 text-white"

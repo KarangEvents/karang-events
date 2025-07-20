@@ -22,9 +22,9 @@ const NavLinks = ({
   className?: string;
 }) => (
   <>
-    {NAV_ITEMS.map((link) => (
+    {NAV_ITEMS.map((link, index) => (
       <Link
-        key={link.href}
+        key={index}
         href={link.href}
         className={className}
         onClick={onClick}

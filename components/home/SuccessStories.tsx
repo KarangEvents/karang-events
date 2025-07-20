@@ -3,27 +3,7 @@ import { Card } from "../ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-
-const successStories = [
-  {
-    id: 1,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 2,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 3,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-];
+import { SUCCESS_STORIES } from "@/constants";
 
 const SuccessStories = () => {
   return (
@@ -39,7 +19,7 @@ const SuccessStories = () => {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {successStories.map((story, index) => (
+          {SUCCESS_STORIES.map((story, index) => (
             <Card
               key={story.id}
               className="card-modern group"
@@ -63,9 +43,7 @@ const SuccessStories = () => {
         </div>
         <div className="text-center">
           <Link href="/showcase">
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-xl">
-              View Full Portfolio
-            </Button>
+            <Button className="px-8 py-7 text-base">View Full Portfolio</Button>
           </Link>
         </div>
       </div>

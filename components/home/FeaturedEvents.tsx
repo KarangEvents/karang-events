@@ -3,46 +3,7 @@ import { Card } from "../ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-
-// Sample data
-const featuredEvents = [
-  {
-    id: 1,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 2,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 3,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 4,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 5,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-  {
-    id: 6,
-    title: "Meet up Freelancer",
-    image: "/placeholder.svg?height=200&width=300",
-    category: "Networking",
-  },
-];
+import { FEATURED_EVENTS } from "@/constants";
 
 const FeaturedEvents = () => {
   return (
@@ -54,7 +15,7 @@ const FeaturedEvents = () => {
           </h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {featuredEvents.map((event, index) => (
+          {FEATURED_EVENTS.map((event, index) => (
             <Card
               key={event.id}
               className="card-modern group"
@@ -78,9 +39,7 @@ const FeaturedEvents = () => {
         </div>
         <div className="text-center">
           <Link href="/events">
-            <Button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-xl">
-              View More
-            </Button>
+            <Button className="px-8 py-7 text-base">View More</Button>
           </Link>
         </div>
       </div>
