@@ -17,7 +17,7 @@ const About = () => {
               in organizing events such as Corporate Events, Product Launches,
               Conferences, Weddings, Family Events and more.
             </p>
-            <Link href="/about">
+            <Link href="/">
               <Button size="xl" className="text-lg">
                 More About Us
               </Button>

@@ -42,7 +42,7 @@ const SuccessStories = () => {
           ))}
         </div>
         <div className="text-center">
-          <Link href="/showcase">
+          <Link href="/">
             <Button className="px-8 py-7 text-base">View Full Portfolio</Button>
           </Link>
         </div>

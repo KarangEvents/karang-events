@@ -38,7 +38,7 @@ const FeaturedEvents = () => {
           ))}
         </div>
         <div className="text-center">
-          <Link href="/events">
+          <Link href="/">
             <Button className="px-8 py-7 text-base">View More</Button>
           </Link>
         </div>
