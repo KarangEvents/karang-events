@@ -35,9 +35,10 @@ const Testimonials = () => {
     <section className="section-padding  container bg-purple-dark text-white">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 ">
             What Our Clients Say
           </h2>
+
           <p className="text-xl text-purple-100">
             Hear from those who have experienced the Karang Events difference
           </p>
