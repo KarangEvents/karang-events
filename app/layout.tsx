@@ -12,8 +12,8 @@ const fontSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["400"],
-  style: ["normal"],
+  weight: ["400", "500", "600", "700"],
+  style: "normal",
   fallback: ["system-ui", "sans-serif"],
 });
 

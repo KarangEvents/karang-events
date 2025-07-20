@@ -32,6 +32,22 @@ const TESTIMONIALS = [
       "Professional service and excellent support. Karang Events exceeded our expectations in every way.",
     avatar: "/placeholder.svg?height=60&width=60",
   },
+  {
+    id: 4,
+    name: "David Smith",
+    role: "Festival Director",
+    content:
+      "Their platform is user-friendly and the team is always ready to assist. A great partner for our annual festival.",
+    avatar: "/placeholder.svg?height=60&width=60",
+  },
+  {
+    id: 5,
+    name: "Laura Kim",
+    role: "Non-Profit Coordinator",
+    content:
+      "We successfully organized our charity event with Karang Events. Their tools made everything so much easier.",
+    avatar: "/placeholder.svg?height=60&width=60",
+  },
 ];
 
 const SUCCESS_STORIES = [

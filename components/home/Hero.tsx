@@ -23,7 +23,10 @@ const Hero = () => {
           </p>
           <div className="animate-fade-in">
             <Link href="/events">
-              <Button size={"xl"} className="text-lg">
+              <Button
+                size={"xl"}
+                className="text-lg font-semibold tracking-wide"
+              >
                 Explore Events
               </Button>
             </Link>
