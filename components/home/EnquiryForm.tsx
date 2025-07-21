@@ -1,4 +1,3 @@
-// components/EventForm.tsx
 "use client";
 
 import { useForm } from "react-hook-form";
@@ -18,26 +17,32 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
-  PopoverContent,
   PopoverTrigger,
+  PopoverContent,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { Calendar as CalendarIcon, PhoneIcon, UserIcon } from "lucide-react";
 import {
   Select,
-  SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectContent,
+  SelectItem,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { UserIcon, PhoneIcon } from "lucide-react";
 
 const formSchema = z.object({
-  name_0444474801: z.string().min(1),
-  phone: z.string().min(1),
-  date: z.coerce.date(),
-  eventType: z.string(),
+  name: z.string().min(1, "Name is required"),
+  phone: z.string().min(1, "Phone is required"),
+  date: z
+    .object({
+      from: z.date(),
+      to: z.date(),
+    })
+    .refine((data) => data.from && data.to, {
+      message: "Please select a date range",
+    }),
+  eventType: z.string().min(1, "Please select event type"),
   message: z.string().optional(),
 });
 
@@ -45,18 +50,27 @@ export default function EventForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      date: new Date(),
+      date: {
+        from: new Date(),
+        to: new Date(),
+      },
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+      toast.success("Event submitted successfully!");
+      console.log("Form values:", values);
+      form.reset({
+        name: "",
+        phone: "",
+        date: {
+          from: new Date(),
+          to: new Date(),
+        },
+        eventType: "",
+        message: "",
+      });
     } catch (error) {
       toast.error("Form submission failed.");
     }
@@ -65,9 +79,10 @@ export default function EventForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        {/* Name */}
         <FormField
           control={form.control}
-          name="name_0444474801"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -84,7 +99,7 @@ export default function EventForm() {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Phone Field */}
+          {/* Phone */}
           <FormField
             control={form.control}
             name="phone"
@@ -104,7 +119,7 @@ export default function EventForm() {
             )}
           />
 
-          {/* Date Picker Field */}
+          {/* Date Range Picker */}
           <FormField
             control={form.control}
             name="date"
@@ -116,23 +131,37 @@ export default function EventForm() {
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full h-14 pl-3 text-left font-normal",
+                          "w-full pr-8 h-14 text-left font-normal",
                           !field.value && "text-muted-foreground"
                         )}
                       >
-                        {field.value
-                          ? format(field.value, "PPP")
-                          : "Pick a date"}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        <CalendarIcon className="mr-auto size-4 opacity-50" />
+                        {field.value?.from ? (
+                          field.value.to ? (
+                            <>
+                              {format(field.value.from, "LLL dd, y")} -{" "}
+                              {format(field.value.to, "LLL dd, y")}
+                            </>
+                          ) : (
+                            format(field.value.from, "LLL dd, y")
+                          )
+                        ) : (
+                          "Pick a date range"
+                        )}
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
-                      mode="single"
+                      initialFocus
+                      mode="range"
+                      defaultMonth={field.value?.from}
                       selected={field.value}
                       onSelect={field.onChange}
-                      initialFocus
+                      numberOfMonths={2}
+                      disabled={(date) =>
+                        date < new Date(new Date().setHours(0, 0, 0, 0))
+                      }
                     />
                   </PopoverContent>
                 </Popover>
@@ -142,6 +171,7 @@ export default function EventForm() {
           />
         </div>
 
+        {/* Event Type */}
         <FormField
           control={form.control}
           name="eventType"
@@ -164,6 +194,7 @@ export default function EventForm() {
           )}
         />
 
+        {/* Message */}
         <FormField
           control={form.control}
           name="message"

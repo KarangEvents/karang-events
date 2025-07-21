@@ -11,7 +11,7 @@ import { FaApple } from "react-icons/fa";
 
 const socialLinks = [
   { href: "#", icon: FiFacebook },
-  { href: "#", icon: FiInstagram },
+  { href: "https://www.instagram.com/karang_events", icon: FiInstagram },
   { href: "#", icon: FiTwitter },
   { href: "#", icon: FiLinkedin },
   { href: "#", icon: FiYoutube },
