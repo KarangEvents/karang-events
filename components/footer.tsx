@@ -8,12 +8,19 @@ import {
 } from "react-icons/fi";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { FaApple } from "react-icons/fa";
+import Image from "next/image";
 
 const socialLinks = [
-  { href: "#", icon: FiFacebook },
+  {
+    href: "https://www.facebook.com/profile.php?id=61573190107120&mibextid=ZbWKwL",
+    icon: FiFacebook,
+  },
   { href: "https://www.instagram.com/karang_events", icon: FiInstagram },
   { href: "#", icon: FiTwitter },
-  { href: "#", icon: FiLinkedin },
+  {
+    href: "https://www.linkedin.com/in/karang-events-46624234a",
+    icon: FiLinkedin,
+  },
   { href: "#", icon: FiYoutube },
 ];
 
@@ -49,72 +56,38 @@ const appLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">K</span>
+    <footer className="relative bg-gray-900 text-white overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30"
+        style={{
+          backgroundImage: "url('/assets/footer-bg.png')",
+        }}
+      />
+      <div className="absolute inset-0 bg-black/60" />
+
+      {/* Content */}
+      <div className="relative container-custom py-16 container">
+        <div className="grid lg:grid-cols-4 gap-12">
+          {/* Logo and App Downloads */}
+          <div className="lg:col-span-1">
+            {/* Karang Logo */}
+            <div className="mb-6">
+              <div className="flex items-center space-x-3 mb-3">
+                <Image
+                  src="/assets/logo.png"
+                  alt="Karang Events Logo"
+                  width={120}
+                  height={50}
+                  className="w-24 h-auto"
+                />
               </div>
-              <span className="text-xl font-bold">Karang Events</span>
+              <p className="text-gray-300 text-sm font-medium">
+                Events That Speak Your Story
+              </p>
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Sophisticated event management platform for customers and vendors.
-              Creating memorable experiences through meticulous planning and
-              flawless execution.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map(({ href, icon: Icon }, i) => (
-                <Link
-                  key={i}
-                  href={href}
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  <Icon className="w-5 h-5" />
-                </Link>
-              ))}
-            </div>
-          </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              {quickLinks.map(({ href, label }, i) => (
-                <li key={i}>
-                  <Link
-                    href={href}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Resources</h3>
-            <ul className="space-y-3">
-              {resources.map(({ href, label }, i) => (
-                <li key={i}>
-                  <Link
-                    href={href}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* App Downloads */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Get Our App</h3>
+            {/* App Download Buttons */}
             <div className="space-y-3">
               {appLinks.map(
                 ({ href, labelTop, labelBottom, icon: Icon }, i) => (
@@ -135,13 +108,73 @@ export default function Footer() {
               )}
             </div>
           </div>
+
+          {/* Quick Links */}
+          <div className="lg:col-span-1">
+            <h3 className="text-lg font-semibold mb-6 text-white">
+              QUICK LINKS
+            </h3>
+            <ul className="space-y-4">
+              {quickLinks.map(({ href, label }, i) => (
+                <li key={i}>
+                  <Link
+                    href={href}
+                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Features */}
+          <div className="lg:col-span-1">
+            <h3 className="text-lg font-semibold mb-6 text-white">FEATURES</h3>
+            <ul className="space-y-4">
+              {resources.map(({ href, label }, i) => (
+                <li key={i}>
+                  <Link
+                    href={href}
+                    className="text-gray-300 hover:text-white transition-colors text-sm"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Empty column for spacing */}
+          <div className="lg:col-span-1"></div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>
-            &copy; {new Date().getFullYear()} Karang Events. All rights
-            reserved.
-          </p>
+        {/* Bottom Section */}
+        <div className="mt-16 pt-8 border-t border-gray-700">
+          <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
+            {/* Contact Info */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-8 space-y-2 sm:space-y-0 text-sm text-gray-300">
+              <div>
+                <span className="font-medium">Email:</span> events@karang.com
+              </div>
+            </div>
+
+            {/* Social Media Icons */}
+            <div className="flex space-x-6">
+              {socialLinks.map(({ href, icon: Icon }, i) => (
+                <Link
+                  key={i}
+                  href={href}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  <Icon className="w-6 h-6" />
+                </Link>
+              ))}
+            </div>
+
+            {/* Copyright */}
+            <div className="text-sm text-gray-400">Copyright © 2025</div>
+          </div>
         </div>
       </div>
     </footer>
