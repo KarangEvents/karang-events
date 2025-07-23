@@ -1,58 +1,7 @@
 import Link from "next/link";
-import {
-  FiFacebook,
-  FiInstagram,
-  FiTwitter,
-  FiLinkedin,
-  FiYoutube,
-} from "react-icons/fi";
-import { IoLogoGooglePlaystore } from "react-icons/io5";
-import { FaApple } from "react-icons/fa";
+
 import Image from "next/image";
-
-const socialLinks = [
-  {
-    href: "https://www.facebook.com/profile.php?id=61573190107120&mibextid=ZbWKwL",
-    icon: FiFacebook,
-  },
-  { href: "https://www.instagram.com/karang_events", icon: FiInstagram },
-  { href: "#", icon: FiTwitter },
-  {
-    href: "https://www.linkedin.com/in/karang-events-46624234a",
-    icon: FiLinkedin,
-  },
-  { href: "#", icon: FiYoutube },
-];
-
-const quickLinks = [
-  { href: "/", label: "Events" },
-  { href: "/", label: "About Us" },
-  { href: "/", label: "Showcase" },
-  { href: "/", label: "Contact" },
-  { href: "/", label: "FAQ" },
-];
-
-const resources = [
-  { href: "/", label: "Blog" },
-  { href: "/", label: "Help Center" },
-  { href: "/", label: "Privacy Policy" },
-  { href: "/", label: "Terms of Service" },
-];
-
-const appLinks = [
-  {
-    href: "#",
-    labelTop: "Download on the",
-    labelBottom: "App Store",
-    icon: FaApple,
-  },
-  {
-    href: "#",
-    labelTop: "Get it on",
-    labelBottom: "Google Play",
-    icon: IoLogoGooglePlaystore,
-  },
-];
+import { APP_LINKS, QUICK_LINKS, RESOURCES, SOCIAL_LINKS } from "@/constants";
 
 export default function Footer() {
   return (
@@ -89,7 +38,7 @@ export default function Footer() {
 
             {/* App Download Buttons */}
             <div className="space-y-3">
-              {appLinks.map(
+              {APP_LINKS.map(
                 ({ href, labelTop, labelBottom, icon: Icon }, i) => (
                   <Link href={href} key={i} className="block">
                     <div className="flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 rounded-lg p-3 transition-colors">
@@ -115,7 +64,7 @@ export default function Footer() {
               QUICK LINKS
             </h3>
             <ul className="space-y-4">
-              {quickLinks.map(({ href, label }, i) => (
+              {QUICK_LINKS.map(({ href, label }, i) => (
                 <li key={i}>
                   <Link
                     href={href}
@@ -132,7 +81,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6 text-white">FEATURES</h3>
             <ul className="space-y-4">
-              {resources.map(({ href, label }, i) => (
+              {RESOURCES.map(({ href, label }, i) => (
                 <li key={i}>
                   <Link
                     href={href}
@@ -161,7 +110,7 @@ export default function Footer() {
 
             {/* Social Media Icons */}
             <div className="flex space-x-6">
-              {socialLinks.map(({ href, icon: Icon }, i) => (
+              {SOCIAL_LINKS.map(({ href, icon: Icon }, i) => (
                 <Link
                   key={i}
                   href={href}

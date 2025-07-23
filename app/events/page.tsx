@@ -1,14 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Calendar, Filter, MapPin, Search, Star, MessageCircle } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  Calendar,
+  Filter,
+  MapPin,
+  Search,
+  Star,
+  MessageCircle,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -16,10 +23,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Sample data for events
 const allEvents = [
@@ -155,7 +168,7 @@ const allEvents = [
     rating: 4.9,
     category: "Festival",
   },
-]
+];
 
 // Available cities for filter
 const cities = [
@@ -172,7 +185,7 @@ const cities = [
   "Seattle",
   "Austin",
   "Denver",
-]
+];
 
 // Available categories for filter
 const categories = [
@@ -184,16 +197,16 @@ const categories = [
   "Charity",
   "Anniversary",
   "Festival",
-]
+];
 
 export default function EventsPage() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCity, setSelectedCity] = useState("All Cities")
-  const [selectedCategory, setSelectedCategory] = useState("All Categories")
-  const [events, setEvents] = useState(allEvents)
-  const [enquiryEvent, setEnquiryEvent] = useState<any>(null)
-  const [enquiryFormOpen, setEnquiryFormOpen] = useState(false)
-  const [enquirySubmitted, setEnquirySubmitted] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCity, setSelectedCity] = useState("All Cities");
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [events, setEvents] = useState(allEvents);
+  const [enquiryEvent, setEnquiryEvent] = useState<any>(null);
+  const [enquiryFormOpen, setEnquiryFormOpen] = useState(false);
+  const [enquirySubmitted, setEnquirySubmitted] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState({
     name: "",
     email: "",
@@ -201,11 +214,11 @@ export default function EventsPage() {
     guests: "",
     date: "",
     message: "",
-  })
+  });
 
   // Filter events based on search query, city, and category
   const filterEvents = () => {
-    let filtered = allEvents
+    let filtered = allEvents;
 
     // Filter by search query
     if (searchQuery) {
@@ -213,66 +226,70 @@ export default function EventsPage() {
         (event) =>
           event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           event.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          event.category.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+          event.category.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
 
     // Filter by city
     if (selectedCity !== "All Cities") {
-      filtered = filtered.filter((event) => event.city === selectedCity)
+      filtered = filtered.filter((event) => event.city === selectedCity);
     }
 
     // Filter by category
     if (selectedCategory !== "All Categories") {
-      filtered = filtered.filter((event) => event.category === selectedCategory)
+      filtered = filtered.filter(
+        (event) => event.category === selectedCategory
+      );
     }
 
-    setEvents(filtered)
-  }
+    setEvents(filtered);
+  };
 
   // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(e.target.value);
     setTimeout(() => {
-      filterEvents()
-    }, 300)
-  }
+      filterEvents();
+    }, 300);
+  };
 
   // Handle city selection change
   const handleCityChange = (value: string) => {
-    setSelectedCity(value)
+    setSelectedCity(value);
     setTimeout(() => {
-      filterEvents()
-    }, 100)
-  }
+      filterEvents();
+    }, 100);
+  };
 
   // Handle category selection change
   const handleCategoryChange = (value: string) => {
-    setSelectedCategory(value)
+    setSelectedCategory(value);
     setTimeout(() => {
-      filterEvents()
-    }, 100)
-  }
+      filterEvents();
+    }, 100);
+  };
 
   // Open enquiry form for a specific event
   const openEnquiryForm = (event: any) => {
-    setEnquiryEvent(event)
-    setEnquiryFormOpen(true)
-    setEnquirySubmitted(false)
-  }
+    setEnquiryEvent(event);
+    setEnquiryFormOpen(true);
+    setEnquirySubmitted(false);
+  };
 
   // Handle enquiry form input changes
-  const handleEnquiryInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setEnquiryForm((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleEnquiryInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setEnquiryForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Handle enquiry form submission
   const handleEnquirySubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Simulate form submission
     setTimeout(() => {
-      setEnquirySubmitted(true)
+      setEnquirySubmitted(true);
       // Reset form after submission
       setEnquiryForm({
         name: "",
@@ -281,17 +298,21 @@ export default function EventsPage() {
         guests: "",
         date: "",
         message: "",
-      })
-    }, 1000)
-  }
+      });
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       <div className="container px-4 md:px-6 py-8 md:py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
           <div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-2">Discover Events</h1>
-            <p className="text-muted-foreground">Find and book the perfect event package for your needs</p>
+            <h1 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-2">
+              Discover Events
+            </h1>
+            <p className="text-muted-foreground">
+              Find and book the perfect event package for your needs
+            </p>
           </div>
         </div>
 
@@ -324,7 +345,10 @@ export default function EventsPage() {
                 </SelectContent>
               </Select>
 
-              <Select value={selectedCategory} onValueChange={handleCategoryChange}>
+              <Select
+                value={selectedCategory}
+                onValueChange={handleCategoryChange}
+              >
                 <SelectTrigger className="w-full sm:w-[180px]">
                   <div className="flex items-center">
                     <Filter className="h-4 w-4 mr-2" />
@@ -347,7 +371,10 @@ export default function EventsPage() {
         {events.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {events.map((event) => (
-              <Card key={event.id} className="overflow-hidden card-hover h-full transition-all duration-300 group">
+              <Card
+                key={event.id}
+                className="overflow-hidden card-hover h-full transition-all duration-300 group"
+              >
                 <div className="relative h-48 w-full overflow-hidden">
                   <Image
                     src={event.image || "/placeholder.svg"}
@@ -360,7 +387,9 @@ export default function EventsPage() {
                   </div>
                 </div>
                 <CardContent className="p-4 flex flex-col h-[calc(100%-12rem)]">
-                  <h3 className="font-serif font-bold text-lg mb-2 line-clamp-2">{event.title}</h3>
+                  <h3 className="font-serif font-bold text-lg mb-2 line-clamp-2">
+                    {event.title}
+                  </h3>
                   <div className="flex items-center text-sm text-muted-foreground mb-1">
                     <Calendar className="h-4 w-4 mr-1 flex-shrink-0" />
                     <span className="truncate">{event.date}</span>
@@ -370,7 +399,9 @@ export default function EventsPage() {
                     <span className="truncate">{event.location}</span>
                   </div>
                   <div className="flex justify-between items-center mt-auto">
-                    <span className="font-bold text-purple-dark">{event.price}</span>
+                    <span className="font-bold text-purple-dark">
+                      {event.price}
+                    </span>
                     <div className="flex items-center">
                       <Star className="h-4 w-4 text-gold fill-gold mr-1" />
                       <span className="text-sm">{event.rating}</span>
@@ -379,12 +410,23 @@ export default function EventsPage() {
 
                   {/* Action Buttons - Appear on hover */}
                   <div className="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Link href={`/payment?event=${event.id}`} className="flex-1">
-                      <Button size="sm" className="w-full bg-purple hover:bg-purple-dark">
+                    <Link
+                      href={`/payment?event=${event.id}`}
+                      className="flex-1"
+                    >
+                      <Button
+                        size="sm"
+                        className="w-full bg-purple hover:bg-purple-dark"
+                      >
                         Book Now
                       </Button>
                     </Link>
-                    <Button size="sm" variant="outline" className="flex-1" onClick={() => openEnquiryForm(event)}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => openEnquiryForm(event)}
+                    >
                       <MessageCircle className="h-4 w-4 mr-1" /> Enquiry
                     </Button>
                   </div>
@@ -397,15 +439,19 @@ export default function EventsPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted mb-4">
               <Search className="h-8 w-8 text-muted-foreground" />
             </div>
-            <h3 className="font-serif text-xl font-bold mb-2">No events found</h3>
-            <p className="text-muted-foreground mb-6">We couldn't find any events matching your search criteria.</p>
+            <h3 className="font-serif text-xl font-bold mb-2">
+              No events found
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              We couldn't find any events matching your search criteria.
+            </p>
             <Button
               variant="outline"
               onClick={() => {
-                setSearchQuery("")
-                setSelectedCity("All Cities")
-                setSelectedCategory("All Categories")
-                setEvents(allEvents)
+                setSearchQuery("");
+                setSelectedCity("All Cities");
+                setSelectedCategory("All Categories");
+                setEvents(allEvents);
               }}
             >
               Clear Filters
@@ -434,7 +480,11 @@ export default function EventsPage() {
                   <path d="m15 18-6-6 6-6" />
                 </svg>
               </Button>
-              <Button variant="outline" size="sm" className="bg-purple text-white">
+              <Button
+                variant="outline"
+                size="sm"
+                className="bg-purple text-white"
+              >
                 1
               </Button>
               <Button variant="outline" size="sm">
@@ -477,8 +527,13 @@ export default function EventsPage() {
           {!enquirySubmitted ? (
             <>
               <DialogHeader>
-                <DialogTitle className="font-serif text-2xl">Event Enquiry</DialogTitle>
-                <DialogDescription>{enquiryEvent && `Send an enquiry about "${enquiryEvent.title}"`}</DialogDescription>
+                <DialogTitle className="font-serif text-2xl">
+                  Event Enquiry
+                </DialogTitle>
+                <DialogDescription>
+                  {enquiryEvent &&
+                    `Send an enquiry about "${enquiryEvent.title}"`}
+                </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleEnquirySubmit} className="space-y-4 py-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -548,7 +603,10 @@ export default function EventsPage() {
                   />
                 </div>
                 <DialogFooter>
-                  <Button type="submit" className="bg-purple hover:bg-purple-dark">
+                  <Button
+                    type="submit"
+                    className="bg-purple hover:bg-purple-dark"
+                  >
                     Submit Enquiry
                   </Button>
                 </DialogFooter>
@@ -573,9 +631,12 @@ export default function EventsPage() {
                   <polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>
               </div>
-              <h3 className="font-serif text-xl font-bold mb-2">Enquiry Submitted!</h3>
+              <h3 className="font-serif text-xl font-bold mb-2">
+                Enquiry Submitted!
+              </h3>
               <p className="text-muted-foreground mb-6">
-                Thank you for your interest. We have received your enquiry and our team will get back to you shortly.
+                Thank you for your interest. We have received your enquiry and
+                our team will get back to you shortly.
               </p>
               <Button onClick={() => setEnquiryFormOpen(false)}>Close</Button>
             </div>
@@ -583,5 +644,5 @@ export default function EventsPage() {
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }

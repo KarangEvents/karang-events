@@ -1,3 +1,13 @@
+import {
+  FiFacebook,
+  FiInstagram,
+  FiTwitter,
+  FiLinkedin,
+  FiYoutube,
+} from "react-icons/fi";
+import { IoLogoGooglePlaystore } from "react-icons/io5";
+import { FaApple } from "react-icons/fa";
+
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/" },
@@ -111,4 +121,58 @@ const FEATURED_EVENTS = [
   },
 ];
 
-export { NAV_ITEMS, TESTIMONIALS, SUCCESS_STORIES, FEATURED_EVENTS };
+//Footer
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.facebook.com/profile.php?id=61573190107120&mibextid=ZbWKwL",
+    icon: FiFacebook,
+  },
+  { href: "https://www.instagram.com/karang_events", icon: FiInstagram },
+  { href: "#", icon: FiTwitter },
+  {
+    href: "https://www.linkedin.com/in/karang-events-46624234a",
+    icon: FiLinkedin,
+  },
+  { href: "#", icon: FiYoutube },
+];
+
+const QUICK_LINKS = [
+  { href: "/", label: "Events" },
+  { href: "/", label: "About Us" },
+  { href: "/", label: "Showcase" },
+  { href: "/", label: "Contact" },
+  { href: "/", label: "FAQ" },
+];
+
+const RESOURCES = [
+  { href: "/", label: "Blog" },
+  { href: "/", label: "Help Center" },
+  { href: "/", label: "Privacy Policy" },
+  { href: "/", label: "Terms of Service" },
+];
+
+const APP_LINKS = [
+  {
+    href: "#",
+    labelTop: "Download on the",
+    labelBottom: "App Store",
+    icon: FaApple,
+  },
+  {
+    href: "#",
+    labelTop: "Get it on",
+    labelBottom: "Google Play",
+    icon: IoLogoGooglePlaystore,
+  },
+];
+
+export {
+  NAV_ITEMS,
+  TESTIMONIALS,
+  SUCCESS_STORIES,
+  FEATURED_EVENTS,
+  SOCIAL_LINKS,
+  QUICK_LINKS,
+  RESOURCES,
+  APP_LINKS,
+};
