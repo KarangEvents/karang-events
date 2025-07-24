@@ -187,6 +187,7 @@ export default function EventForm() {
                   <SelectItem value="wedding">Wedding</SelectItem>
                   <SelectItem value="birthday">Birthday</SelectItem>
                   <SelectItem value="corporate">Corporate</SelectItem>
+                  <SelectItem value="corporate">Others</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

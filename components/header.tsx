@@ -13,6 +13,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { NAV_ITEMS } from "@/constants";
+import { IoSearchSharp } from "react-icons/io5";
 
 const NavLinks = ({
   onClick,
@@ -37,6 +38,9 @@ const NavLinks = ({
 
 const AuthButtons = () => (
   <div className="hidden md:flex items-center gap-4 min-w-[160px] justify-end">
+    <Link href={"/events"}>
+      <IoSearchSharp color="black" className="size-6 mr-2 cursor-pointer" />
+    </Link>
     <SignedOut>
       <SignInButton />
       <SignUpButton>
