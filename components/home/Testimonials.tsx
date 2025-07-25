@@ -57,8 +57,14 @@ export default function TestimonialsCarousel() {
   }, [emblaApi, onInit, onSelect]);
 
   return (
-    <section className="section-padding bg-purple-dark text-white">
-      <div className="container">
+    <section className="section-padding relative  bg-[url('/assets/testimonial-bg-pattern.png')] bg-cover bg-center bg-no-repeat">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-[#32174D]/90 z-0" />
+
+      {/* Content */}
+
+      {/* Section Title */}
+      <div className="container z-10 text-white relative">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             What Our Clients Say

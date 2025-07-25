@@ -22,7 +22,7 @@ const Hero = () => {
             event into a lasting memory.
           </p>
           <div className="animate-fade-in">
-            <Link href="/">
+            <Link href="/events">
               <Button
                 size={"xl"}
                 className="text-lg font-semibold tracking-wide"
