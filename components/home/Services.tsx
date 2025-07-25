@@ -24,7 +24,8 @@ const Services = () => {
             ) => (
               <Card
                 key={index}
-                className={`rounded-3xl p-8 border-0 text-center ${gradient}`}
+                className="rounded-3xl p-8 border-0 text-center"
+                style={{ background: gradient }}
               >
                 <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"

@@ -180,7 +180,7 @@ const SERVICE_DATA = [
     Icon: MdCorporateFare,
     iconBg: "#DAC5FB",
     gradient:
-      "bg-[linear-gradient(360deg,rgba(91,33,182,0.19)_0%,rgba(255,255,255,0.19)_100%)]",
+      "linear-gradient(360deg, rgba(91, 33, 182, 0.19) 0%, rgba(255, 255, 255, 0.19) 100%)",
     iconClassName: "text-black",
   },
   {
@@ -190,7 +190,7 @@ const SERVICE_DATA = [
     Icon: MdOutlineFestival,
     iconBg: "#EFC69B",
     gradient:
-      "bg-[linear-gradient(360deg,rgba(239,198,155,0.19)_0%,rgba(255,255,255,0.19)_100%)]",
+      "linear-gradient(360deg, rgba(239, 198, 155, 0.19) 0%, rgba(255, 255, 255, 0.19) 100%)",
     iconClassName: "text-black",
   },
   {
@@ -199,11 +199,10 @@ const SERVICE_DATA = [
       "Access to exclusive venues and comprehensive event management services tailored to your needs.",
     Icon: MdWhereToVote,
     iconBg: "#9C9B9E",
-    gradient: "bg-[linear-gradient(180deg,#FFFFFF_0%,#D1CED6_100%)]",
+    gradient: "linear-gradient(180deg, #FFFFFF 0%, #D1CED6 100%)",
     iconClassName: "text-white",
   },
 ];
-
 export {
   NAV_ITEMS,
   TESTIMONIALS,
