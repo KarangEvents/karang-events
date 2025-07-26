@@ -16,16 +16,7 @@ import {
   Star,
   MessageCircle,
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+
 import {
   Select,
   SelectContent,
@@ -34,192 +25,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
-
-// Sample data for events
-const allEvents = [
-  {
-    id: 1,
-    title: "Corporate Gala Dinner",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "June 15, 2023",
-    location: "Grand Hyatt, New York",
-    city: "New York",
-    price: "$1,200",
-    rating: 4.8,
-    category: "Corporate",
-  },
-  {
-    id: 2,
-    title: "Wedding Reception Package",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "Flexible Dates",
-    location: "Beachfront Resort, Miami",
-    city: "Miami",
-    price: "$3,500",
-    rating: 4.9,
-    category: "Wedding",
-  },
-  {
-    id: 3,
-    title: "Tech Conference Setup",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "September 10-12, 2023",
-    location: "Convention Center, San Francisco",
-    city: "San Francisco",
-    price: "$5,000",
-    rating: 4.7,
-    category: "Conference",
-  },
-  {
-    id: 4,
-    title: "Birthday Celebration Package",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "Customizable",
-    location: "Various Venues, Delhi",
-    city: "Delhi",
-    price: "$800",
-    rating: 4.6,
-    category: "Birthday",
-  },
-  {
-    id: 5,
-    title: "Charity Fundraiser Gala",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "November 5, 2023",
-    location: "Luxury Hotel, Chicago",
-    city: "Chicago",
-    price: "$2,500",
-    rating: 4.5,
-    category: "Charity",
-  },
-  {
-    id: 6,
-    title: "Product Launch Event",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "July 22, 2023",
-    location: "Modern Gallery, Los Angeles",
-    city: "Los Angeles",
-    price: "$4,200",
-    rating: 4.8,
-    category: "Corporate",
-  },
-  {
-    id: 7,
-    title: "Anniversary Celebration",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "Customizable",
-    location: "Rooftop Restaurant, Seattle",
-    city: "Seattle",
-    price: "$1,800",
-    rating: 4.7,
-    category: "Anniversary",
-  },
-  {
-    id: 8,
-    title: "Music Festival Production",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "August 18-20, 2023",
-    location: "Outdoor Park, Austin",
-    city: "Austin",
-    price: "$12,000",
-    rating: 4.9,
-    category: "Festival",
-  },
-  {
-    id: 9,
-    title: "Corporate Retreat",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "October 5-7, 2023",
-    location: "Mountain Resort, Denver",
-    city: "Denver",
-    price: "$9,500",
-    rating: 4.7,
-    category: "Corporate",
-  },
-  {
-    id: 10,
-    title: "Wedding Ceremony Package",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "Flexible Dates",
-    location: "Garden Venue, Bengaluru",
-    city: "Bengaluru",
-    price: "$2,800",
-    rating: 4.8,
-    category: "Wedding",
-  },
-  {
-    id: 11,
-    title: "Tech Startup Meetup",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "July 15, 2023",
-    location: "Innovation Hub, Bengaluru",
-    city: "Bengaluru",
-    price: "$1,200",
-    rating: 4.6,
-    category: "Conference",
-  },
-  {
-    id: 12,
-    title: "Cultural Festival",
-    image: "/placeholder.svg?height=400&width=600",
-    date: "September 22-24, 2023",
-    location: "Heritage Center, Delhi",
-    city: "Delhi",
-    price: "$3,500",
-    rating: 4.9,
-    category: "Festival",
-  },
-];
-
-// Available cities for filter
-const cities = [
-  "All Cities",
-  "Delhi",
-  "Mumbai",
-  "Bengaluru",
-  "Hyderabad",
-  "New York",
-  "Miami",
-  "San Francisco",
-  "Chicago",
-  "Los Angeles",
-  "Seattle",
-  "Austin",
-  "Denver",
-];
-
-// Available categories for filter
-const categories = [
-  "All Categories",
-  "Corporate",
-  "Wedding",
-  "Conference",
-  "Birthday",
-  "Charity",
-  "Anniversary",
-  "Festival",
-];
+import { EVENT_CATEGORIES, EVENT_CITIES, EVENTS_DATA } from "@/constants";
+import EnquiryModal from "@/components/modal/EnquiryModal";
 
 export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCity, setSelectedCity] = useState("All Cities");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
-  const [events, setEvents] = useState(allEvents);
-  const [enquiryEvent, setEnquiryEvent] = useState<any>(null);
+  const [events, setEvents] = useState(EVENTS_DATA);
   const [enquiryFormOpen, setEnquiryFormOpen] = useState(false);
-  const [enquirySubmitted, setEnquirySubmitted] = useState(false);
-  const [enquiryForm, setEnquiryForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    guests: "",
-    date: "",
-    message: "",
-  });
 
   // Filter events based on search query, city, and category
   const filterEvents = () => {
-    let filtered = allEvents;
+    let filtered = EVENTS_DATA;
 
     // Filter by search query
     if (searchQuery) {
@@ -272,35 +90,7 @@ export default function EventsPage() {
 
   // Open enquiry form for a specific event
   const openEnquiryForm = (event: any) => {
-    setEnquiryEvent(event);
     setEnquiryFormOpen(true);
-    setEnquirySubmitted(false);
-  };
-
-  // Handle enquiry form input changes
-  const handleEnquiryInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setEnquiryForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Handle enquiry form submission
-  const handleEnquirySubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulate form submission
-    setTimeout(() => {
-      setEnquirySubmitted(true);
-      // Reset form after submission
-      setEnquiryForm({
-        name: "",
-        email: "",
-        phone: "",
-        guests: "",
-        date: "",
-        message: "",
-      });
-    }, 1000);
   };
 
   return (
@@ -338,7 +128,7 @@ export default function EventsPage() {
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  {cities.map((city) => (
+                  {EVENT_CITIES.map((city) => (
                     <SelectItem key={city} value={city}>
                       {city}
                     </SelectItem>
@@ -357,7 +147,7 @@ export default function EventsPage() {
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((category) => (
+                  {EVENT_CATEGORIES.map((category) => (
                     <SelectItem key={category} value={category}>
                       {category}
                     </SelectItem>
@@ -412,10 +202,11 @@ export default function EventsPage() {
                   {/* Action Buttons - Appear on hover */}
                   <div className="grid grid-cols-2 gap-2 mt-4">
                     <Link
-                      href={`/payment?event=${event.id}`}
+                      href={`/events/${event.id}`}
                       className="w-full"
+                      passHref
                     >
-                      <Button className="w-full">Book Now</Button>
+                      <Button className="w-full">View Details</Button>
                     </Link>
                     <Button
                       variant="outline"
@@ -446,7 +237,7 @@ export default function EventsPage() {
                 setSearchQuery("");
                 setSelectedCity("All Cities");
                 setSelectedCategory("All Categories");
-                setEvents(allEvents);
+                setEvents(EVENTS_DATA);
               }}
             >
               Clear Filters
@@ -491,127 +282,10 @@ export default function EventsPage() {
       </div>
 
       {/* Enquiry Modal */}
-      <Dialog open={enquiryFormOpen} onOpenChange={setEnquiryFormOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          {!enquirySubmitted ? (
-            <>
-              <DialogHeader>
-                <DialogTitle className="font-serif text-2xl">
-                  Event Enquiry
-                </DialogTitle>
-                <DialogDescription>
-                  {enquiryEvent &&
-                    `Send an enquiry about "${enquiryEvent.title}"`}
-                </DialogDescription>
-              </DialogHeader>
-              <form onSubmit={handleEnquirySubmit} className="space-y-4 py-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Your Name</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={enquiryForm.name}
-                      onChange={handleEnquiryInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={enquiryForm.email}
-                      onChange={handleEnquiryInputChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      value={enquiryForm.phone}
-                      onChange={handleEnquiryInputChange}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="guests">Number of Guests</Label>
-                    <Input
-                      id="guests"
-                      name="guests"
-                      type="number"
-                      value={enquiryForm.guests}
-                      onChange={handleEnquiryInputChange}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="date">Preferred Date</Label>
-                  <Input
-                    id="date"
-                    name="date"
-                    type="date"
-                    value={enquiryForm.date}
-                    onChange={handleEnquiryInputChange}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Your Message</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={enquiryForm.message}
-                    onChange={handleEnquiryInputChange}
-                    placeholder="Please provide any additional details about your requirements..."
-                  />
-                </div>
-                <DialogFooter>
-                  <Button
-                    type="submit"
-                    className="bg-purple hover:bg-purple-dark"
-                  >
-                    Submit Enquiry
-                  </Button>
-                </DialogFooter>
-              </form>
-            </>
-          ) : (
-            <div className="py-12 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-8 w-8 text-green-600"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </div>
-              <h3 className="font-serif text-xl font-bold mb-2">
-                Enquiry Submitted!
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Thank you for your interest. We have received your enquiry and
-                our team will get back to you shortly.
-              </p>
-              <Button onClick={() => setEnquiryFormOpen(false)}>Close</Button>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <EnquiryModal
+        enquiryFormOpen={enquiryFormOpen}
+        setEnquiryFormOpen={() => setEnquiryFormOpen(false)}
+      />
     </div>
   );
 }
