@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { label: "Events", href: "/events" },
   { label: "Showcase", href: "/" },
   { label: "About", href: "/" },
-  { label: "FAQ", href: "/" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/" },
 ];
 
@@ -203,6 +203,77 @@ const SERVICE_DATA = [
     iconClassName: "text-white",
   },
 ];
+
+// FAQ data structure
+const FAQ_CATEGORIES = [
+  {
+    title: "General Questions",
+    items: [
+      {
+        question: "What is Karang Events?",
+        answer:
+          "Karang Events is a sophisticated event management platform that connects customers with premium event services and vendors. We offer a wide range of event packages from corporate galas to weddings and private celebrations.",
+      },
+      {
+        question: "How do I create an account?",
+        answer:
+          "To create an account, click on the 'Sign Up' button in the top right corner of the homepage. Fill in your details, select your account type (User, Vendor, or Organization), and follow the prompts to complete your registration.",
+      },
+      {
+        question: "Is Karang Events available in my city?",
+        answer:
+          "Karang Events currently operates in major metropolitan areas across the country. You can check availability in your location by entering your city in the search bar on our events page.",
+      },
+    ],
+  },
+  {
+    title: "Booking & Payments",
+    items: [
+      {
+        question: "How do I book an event?",
+        answer:
+          "To book an event, browse our event listings and select the one that interests you. Click on 'Book Now', select your preferred date and time, and proceed to checkout. You'll receive a confirmation email once your booking is complete.",
+      },
+      {
+        question: "Can I customize an event package?",
+        answer:
+          "Yes, many of our event packages can be customized to suit your specific requirements. When viewing an event, look for the 'Customization Options' section or contact the vendor directly to discuss your needs.",
+      },
+      {
+        question: "What payment methods do you support?",
+        answer:
+          "We accept all major credit and debit cards, UPI payments, net banking, and digital wallets. For corporate bookings, we also offer invoice-based payments with terms.",
+      },
+      {
+        question: "What is your cancellation policy?",
+        answer:
+          "Cancellation policies vary by vendor and event type. The specific policy for each event is clearly displayed on the event details page before booking. Generally, cancellations made 30+ days before the event date receive a full refund, while those made 15-29 days before receive a 50% refund.",
+      },
+    ],
+  },
+
+  {
+    title: "Technical Support",
+    items: [
+      {
+        question: "I forgot my password. How do I reset it?",
+        answer:
+          "Click on 'Login' and then select 'Forgot Password'. Enter your registered email address, and we'll send you instructions to reset your password.",
+      },
+      {
+        question: "The website isn't working properly. What should I do?",
+        answer:
+          "Try clearing your browser cache and cookies, or try using a different browser. If the issue persists, please contact our support team with details of the problem and screenshots if possible.",
+      },
+      {
+        question: "How do I update my profile information?",
+        answer:
+          "Log in to your account, click on your profile icon in the top right corner, and select 'Profile Settings'. Here, you can update your personal information, change your password, and manage your notification preferences.",
+      },
+    ],
+  },
+];
+
 export {
   NAV_ITEMS,
   TESTIMONIALS,
@@ -213,4 +284,5 @@ export {
   RESOURCES,
   APP_LINKS,
   SERVICE_DATA,
+  FAQ_CATEGORIES,
 };
