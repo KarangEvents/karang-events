@@ -46,8 +46,27 @@ export default function EventForm() {
 
   function onSubmit(values: z.infer<typeof HomeEnquiryformSchema>) {
     try {
-      toast.success("Event submitted successfully!");
-      console.log("Form values:", values);
+      const { name, phone, eventType, message, date } = values;
+
+      const formattedDate =
+        date?.from && date?.to
+          ? `${format(date.from, "LLL dd, yyyy")} - ${format(
+              date.to,
+              "LLL dd, yyyy"
+            )}`
+          : "N/A";
+
+      const whatsappMessage = `Hello, I have an event enquiry:\n\n Name: ${name}\n Phone: ${phone}\n Event Type: ${eventType}\n Dates: ${formattedDate}\n Message: ${
+        message || "N/A"
+      }`;
+
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      const whatsappNumber = "7019872097"; // Change to your number (country code + number)
+
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      window.open(whatsappUrl, "_blank");
+
       form.reset({
         name: "",
         phone: "",
