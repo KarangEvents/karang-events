@@ -436,6 +436,10 @@ const EVENT_CATEGORIES = [
   "Festival",
 ];
 
+//Common
+
+const WHATSAPP_NUMBER = "7019872097"; // Example WhatsApp number
+
 export {
   NAV_ITEMS,
   TESTIMONIALS,
@@ -450,4 +454,5 @@ export {
   EVENTS_DATA,
   EVENT_CITIES,
   EVENT_CATEGORIES,
+  WHATSAPP_NUMBER,
 };
