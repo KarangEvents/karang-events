@@ -1,10 +1,5 @@
-import {
-  FiFacebook,
-  FiInstagram,
-  FiTwitter,
-  FiLinkedin,
-  FiYoutube,
-} from "react-icons/fi";
+import { FiFacebook, FiInstagram, FiLinkedin, FiYoutube } from "react-icons/fi";
+import { FaXTwitter } from "react-icons/fa6";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { FaApple } from "react-icons/fa";
 import {
@@ -17,9 +12,8 @@ const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
   { label: "Showcase", href: "/" },
-  { label: "About", href: "/" },
+  { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/" },
 ];
 
 const TESTIMONIALS = [
@@ -133,27 +127,28 @@ const SOCIAL_LINKS = [
     icon: FiFacebook,
   },
   { href: "https://www.instagram.com/karang_events", icon: FiInstagram },
-  { href: "#", icon: FiTwitter },
+  { href: "https://x.com/karang1942131?s=21", icon: FaXTwitter },
   {
     href: "https://www.linkedin.com/in/karang-events-46624234a",
     icon: FiLinkedin,
   },
-  { href: "#", icon: FiYoutube },
+  {
+    href: "https://youtube.com/@karang-n1u?si=qHNb_4f_Y6O3un76",
+    icon: FiYoutube,
+  },
 ];
 
 const QUICK_LINKS = [
-  { href: "/", label: "Events" },
-  { href: "/", label: "About Us" },
-  { href: "/", label: "Showcase" },
-  { href: "/", label: "Contact" },
-  { href: "/", label: "FAQ" },
+  { href: "/events", label: "Events" },
+  { href: "/about", label: "About Us" },
+  { href: "/showcase", label: "Showcase" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 const RESOURCES = [
-  { href: "/", label: "Blog" },
-  { href: "/", label: "Help Center" },
-  { href: "/", label: "Privacy Policy" },
-  { href: "/", label: "Terms of Service" },
+  { href: "/terms-of-service", label: "Terms of Service" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/cancellation-and-refunds", label: "Cancellation & Refunds Policy" },
 ];
 
 const APP_LINKS = [

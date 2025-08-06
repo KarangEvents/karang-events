@@ -30,25 +30,12 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-
-const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  phone: z.string().min(1, "Phone is required"),
-  date: z
-    .object({
-      from: z.date(),
-      to: z.date(),
-    })
-    .refine((data) => data.from && data.to, {
-      message: "Please select a date range",
-    }),
-  eventType: z.string().min(1, "Please select event type"),
-  message: z.string().optional(),
-});
+import { HomeEnquiryformSchema } from "@/lib/schema";
+import { FiSend } from "react-icons/fi";
 
 export default function EventForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof HomeEnquiryformSchema>>({
+    resolver: zodResolver(HomeEnquiryformSchema),
     defaultValues: {
       date: {
         from: new Date(),
@@ -57,7 +44,7 @@ export default function EventForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof HomeEnquiryformSchema>) {
     try {
       toast.success("Event submitted successfully!");
       console.log("Form values:", values);
@@ -78,7 +65,7 @@ export default function EventForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {/* Name */}
         <FormField
           control={form.control}
@@ -89,7 +76,7 @@ export default function EventForm() {
                 <Input
                   placeholder="Your name"
                   {...field}
-                  className="h-14"
+                  className="h-14 rounded-2xl"
                   icon={<UserIcon className="size-5" />}
                 />
               </FormControl>
@@ -98,7 +85,7 @@ export default function EventForm() {
           )}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {/* Phone */}
           <FormField
             control={form.control}
@@ -109,7 +96,7 @@ export default function EventForm() {
                   <Input
                     placeholder="Phone number"
                     type="tel"
-                    className="h-14"
+                    className="h-14 rounded-2xl"
                     {...field}
                     icon={<PhoneIcon className="size-4" />}
                   />
@@ -119,77 +106,84 @@ export default function EventForm() {
             )}
           />
 
-          {/* Date Range Picker */}
+          {/* Event Type */}
           <FormField
             control={form.control}
-            name="date"
+            name="eventType"
             render={({ field }) => (
-              <FormItem className="space-y-2">
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "w-full pr-8 h-14 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        <CalendarIcon className="mr-auto size-4 opacity-50" />
-                        {field.value?.from ? (
-                          field.value.to ? (
-                            <>
-                              {format(field.value.from, "LLL dd, y")} -{" "}
-                              {format(field.value.to, "LLL dd, y")}
-                            </>
-                          ) : (
-                            format(field.value.from, "LLL dd, y")
-                          )
-                        ) : (
-                          "Pick a date range"
-                        )}
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      initialFocus
-                      mode="range"
-                      defaultMonth={field.value?.from}
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      numberOfMonths={2}
-                      disabled={(date) =>
-                        date < new Date(new Date().setHours(0, 0, 0, 0))
-                      }
-                    />
-                  </PopoverContent>
-                </Popover>
+              <FormItem>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="h-14 rounded-2xl">
+                      <SelectValue placeholder="Choose event type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="wedding">Wedding</SelectItem>
+                    <SelectItem value="birthday">Birthday</SelectItem>
+                    <SelectItem value="corporate">Corporate</SelectItem>
+                    <SelectItem value="others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
 
-        {/* Event Type */}
+        {/* Date Range Picker */}
         <FormField
           control={form.control}
-          name="eventType"
+          name="date"
           render={({ field }) => (
-            <FormItem>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger className="h-14">
-                    <SelectValue placeholder="Choose event type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="wedding">Wedding</SelectItem>
-                  <SelectItem value="birthday">Birthday</SelectItem>
-                  <SelectItem value="corporate">Corporate</SelectItem>
-                  <SelectItem value="corporate">Others</SelectItem>
-                </SelectContent>
-              </Select>
+            <FormItem className="space-y-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      className={cn(
+                        "w-full pr-8 h-14 text-left font-normal rounded-2xl",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <div className="flex items-center gap-2 mr-auto">
+                        <CalendarIcon className="size-4 opacity-50" />
+                        <span className="">
+                          {field.value?.from ? (
+                            field.value.to ? (
+                              <>
+                                {format(field.value.from, "LLL dd, y")} -{" "}
+                                {format(field.value.to, "LLL dd, y")}
+                              </>
+                            ) : (
+                              format(field.value.from, "LLL dd, y")
+                            )
+                          ) : (
+                            "Pick a date range"
+                          )}
+                        </span>
+                      </div>
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    initialFocus
+                    mode="range"
+                    defaultMonth={field.value?.from}
+                    selected={field.value}
+                    onSelect={field.onChange}
+                    numberOfMonths={2}
+                    disabled={(date) =>
+                      date < new Date(new Date().setHours(0, 0, 0, 0))
+                    }
+                  />
+                </PopoverContent>
+              </Popover>
               <FormMessage />
             </FormItem>
           )}
@@ -205,7 +199,7 @@ export default function EventForm() {
                 <Textarea
                   placeholder="Tell us about your event..."
                   rows={4}
-                  className="resize-none"
+                  className="resize-none rounded-2xl"
                   {...field}
                 />
               </FormControl>
@@ -214,7 +208,12 @@ export default function EventForm() {
           )}
         />
 
-        <Button type="submit" className="w-full !mt-6" size={"lg"}>
+        <Button
+          type="submit"
+          className="w-full font-semibold tracking-wide text-base !rounded-3xl"
+          size={"lg"}
+        >
+          <FiSend className=" size-5" />
           Send Enquiry
         </Button>
       </form>

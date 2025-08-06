@@ -14,6 +14,7 @@ import {
 } from "@clerk/nextjs";
 import { NAV_ITEMS } from "@/constants";
 import { IoSearchSharp } from "react-icons/io5";
+import Image from "next/image";
 
 const NavLinks = ({
   onClick,
@@ -37,15 +38,14 @@ const NavLinks = ({
 );
 
 const AuthButtons = () => (
-  <div className="hidden md:flex items-center gap-4 min-w-[160px] justify-end">
+  <div className="hidden md:flex items-center gap-4 justify-end">
     <Link href={"/events"}>
       <IoSearchSharp color="black" className="size-6 mr-2 cursor-pointer" />
     </Link>
     <SignedOut>
-      <SignInButton />
-      <SignUpButton>
-        <Button>Sign Up</Button>
-      </SignUpButton>
+      <SignInButton mode="modal">
+        <Button>Sign In</Button>
+      </SignInButton>
     </SignedOut>
     <SignedIn>
       <UserButton />
@@ -81,16 +81,19 @@ export default function Header() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link
-          href="/"
-          className="font-serif text-2xl font-bold bg-gradient-to-r from-purple-dark via-purple to-gold bg-clip-text text-transparent"
-        >
-          Karang Events
+        <Link href="/">
+          <Image
+            src="/assets/logo-black.png"
+            alt="Logo"
+            width={60}
+            height={60}
+            className="object-contain rounded-full"
+          />
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6">
-          <NavLinks className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" />
+          <NavLinks className="text-base font-semibold text-muted-foreground transition-colors hover:text-foreground !tracking-normal" />
         </nav>
 
         {/* Auth */}

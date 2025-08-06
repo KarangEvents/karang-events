@@ -2,11 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format, isToday } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -174,6 +173,15 @@ export function DatePickerForm() {
             </FormItem>
           )}
         />
+
+        <Button
+          type="submit"
+          variant="outline"
+          className="w-full h-12 bg-transparent"
+        >
+          <MessageCircle className="size-4" />
+          Send Enquiry
+        </Button>
       </form>
     </Form>
   );
