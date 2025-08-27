@@ -44,7 +44,7 @@ const NavLinks = ({
 );
 
 const AuthButtons = () => (
-  <div className="flex items-center gap-4">
+  <div className="flex items-center gap-6">
     <Link href={"/events"}>
       <IoSearchSharp color="black" className="size-6 cursor-pointer" />
     </Link>
@@ -107,7 +107,7 @@ export default function Header() {
                 />
               </div>
 
-             
+
             </SheetContent>
           </Sheet>
 

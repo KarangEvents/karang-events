@@ -5,7 +5,7 @@ import FeaturedEvents from "@/components/home/FeaturedEvents";
 import Services from "@/components/home/Services";
 import Testimonials from "@/components/home/Testimonials";
 import SuccessStories from "@/components/home/SuccessStories";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/client";
 
 const REVIEWS_QUERY = `*[_type == "homeReview"] | order(_createdAt desc) {
   _id,
@@ -23,11 +23,10 @@ const SUCCESS_STORIES_QUERY = `*[_type == "successStory"] | order(_createdAt des
 }`;
 
 
-const options = { next: { revalidate: 300 } };
 
 export default async function HomePage() {
-  const reviews = await client.fetch(REVIEWS_QUERY, {}, options)
-  const successStories = await client.fetch(SUCCESS_STORIES_QUERY, {}, options)  
+  const reviews = await sanityFetch({ query: REVIEWS_QUERY });
+  const successStories = await sanityFetch({ query: SUCCESS_STORIES_QUERY });
 
   return (
     <>
@@ -42,9 +41,9 @@ export default async function HomePage() {
       {/* Services Section */}
       <Services />
       {/* Testimonials Section */}
-      <Testimonials reviews={reviews}/>
+      <Testimonials reviews={reviews} />
       {/* Success Stories Section */}
-      <SuccessStories 
+      <SuccessStories
         successStories={successStories}
       />
     </>

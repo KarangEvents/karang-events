@@ -1,5 +1,6 @@
 import React from "react";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/client";
+import { PortableText } from "@portabletext/react";
 
 const TERMS_QUERY = `*[_type == "refundsAndReturns" && isActive == true] | order(lastUpdated desc)[0] {
   _id,
@@ -11,7 +12,7 @@ const TERMS_QUERY = `*[_type == "refundsAndReturns" && isActive == true] | order
 }`;
 
 const Page = async () => {
-  const terms = await client.fetch(TERMS_QUERY);
+  const terms = await sanityFetch({ query: TERMS_QUERY });
 
   if (!terms) {
     return <div>Terms and conditions not found</div>;
@@ -26,27 +27,7 @@ const Page = async () => {
 
       {/* Render the block content */}
       <div className="prose max-w-none">
-        {terms.content &&
-          terms.content.map((block: any, index: number) => {
-            if (block._type === "block") {
-              return (
-                <div key={index}>
-                  {block.children.map((child: any, childIndex: number) => (
-                    <span key={childIndex}>
-                      {child.marks?.includes("strong") ? (
-                        <strong>{child.text}</strong>
-                      ) : child.marks?.includes("em") ? (
-                        <em>{child.text}</em>
-                      ) : (
-                        child.text
-                      )}
-                    </span>
-                  ))}
-                </div>
-              );
-            }
-            return null;
-          })}
+        <PortableText value={terms.content} />
       </div>
     </div>
   );

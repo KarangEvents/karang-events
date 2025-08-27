@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import InstaGrids from "@/components/showcase/InstaGrids"
-import { client } from "@/sanity/client";
+import { client, sanityFetch } from "@/sanity/client";
 import ContactSection from "@/components/common/ContactSection";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
@@ -13,12 +13,11 @@ const SHOWCASE_QUERY = `*[_type == "showcase"]{
   instagramUrl,
 }`;
 
-const options = { next: { revalidate: 300 } };
 
 
 export default async function ShowcasePage() {
 
-  const links = await client.fetch(SHOWCASE_QUERY, {}, options)
+  const links = await sanityFetch({ query: SHOWCASE_QUERY })
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
@@ -64,12 +63,12 @@ export default async function ShowcasePage() {
               Stay connected with us on Instagram for behind-the-scenes content, event highlights, and inspiration.
             </p>
             <div className="mt-6">
-              <Link href={SOCIAL_LINKS[1].href} target="_blank">  
+              <Link href={SOCIAL_LINKS[1].href} target="_blank">
 
-              <Button>
-                <FaInstagram className="h-5 w-5 mr-2" />
-                Follow @KarangEvents
-              </Button>
+                <Button>
+                  <FaInstagram className="h-5 w-5 mr-2" />
+                  Follow @KarangEvents
+                </Button>
               </Link>
             </div>
           </div>
