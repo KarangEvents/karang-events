@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import useEmblaCarousel, { EmblaOptionsType } from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/SanityImageUrl";
 import type { SanityImageObject } from "@sanity/image-url/lib/types/types";
@@ -9,7 +9,7 @@ import type { IGallery } from "@/types";
 
 type HeroSliderProps = {
   slides: IGallery[];
-  options?: EmblaOptionsType;
+  options?: any;
 };
 
 const HeroSlider: React.FC<HeroSliderProps> = ({ slides, options }) => {
@@ -50,7 +50,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, options }) => {
       {/* Main Slider */}
       <div className="overflow-hidden rounded-xl" ref={emblaMainRef}>
         <div className="flex gap-4">
-          {slides.map((image) => (
+          {slides?.length && slides.map((image) => (
             <div
               key={image._key}
               className="flex-[0_0_100%] relative h-[300px] md:h-[380px] rounded-xl overflow-hidden"
@@ -74,17 +74,16 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, options }) => {
       <div className="mt-6">
         <div className="overflow-hidden" ref={emblaThumbsRef}>
           <div className="flex gap-4">
-            {slides.map((image, index) => {
+            {slides?.map((image, index) => {
               const isSelected = index === selectedIndex;
               return (
                 <button
                   key={image._key}
                   onClick={() => onThumbClick(index)}
-                  className={`w-24 h-20 md:w-28 md:h-24 rounded-lg overflow-hidden border-2 focus:outline-none transition-all ${
-                    isSelected
-                      ? "border-yellow-400 shadow-md"
-                      : "border-transparent"
-                  }`}
+                  className={`w-24 h-20 md:w-28 md:h-24 rounded-lg overflow-hidden border-2 focus:outline-none transition-all ${isSelected
+                    ? "border-yellow-400 shadow-md"
+                    : "border-transparent"
+                    }`}
                   aria-label={`Go to slide ${index + 1}`}
                 >
                   <Image

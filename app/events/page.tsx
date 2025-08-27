@@ -1,7 +1,7 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import SearchWithFilter from "@/components/events/SearchWithFilter";
 import EventsList from "@/components/events/EventsList";
-import { client } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/client";
 import { IEvent, ICategory, IArea } from "@/types";
 
 const EVENTS_QUERY = `*[_type == "event"]{
@@ -42,9 +42,9 @@ export default async function EventsPage({
 
   const [events, categories, areas]: [IEvent[], ICategory[], IArea[]] =
     await Promise.all([
-      client.fetch(EVENTS_QUERY, {}, options),
-      client.fetch(CATEGORIES_QUERY, {}, options),
-      client.fetch(AREAS_QUERY, {}, options),
+      sanityFetch({ query: EVENTS_QUERY }),
+      sanityFetch({ query: CATEGORIES_QUERY }),
+      sanityFetch({ query: AREAS_QUERY }),
     ]);
 
   const normalize = (str: string) => str.toLowerCase().replace(/[\s_-]/g, "");

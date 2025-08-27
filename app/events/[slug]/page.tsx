@@ -3,7 +3,7 @@ import HeroSlider from "@/components/event-detail/HeroSlider";
 import StickyRightBar from "@/components/event-detail/StickyRightBar";
 import { Card } from "@/components/ui/card";
 import Reviews from "@/components/event-detail/Reviews";
-import { client } from "@/sanity/client";
+import { client, sanityFetch } from "@/sanity/client";
 import { ISingleEvent } from "@/types";
 import SimilarEventCard from "@/components/event-detail/SimilarEventCard";
 import InfoCard from "@/components/event-detail/InfoCard";
@@ -40,10 +40,15 @@ type Params = Promise<{ slug: string }>;
 export default async function EventDetailPage({ params }: { params: Params }) {
   const { slug } = await params;
 
-  const eventData: ISingleEvent = await client.fetch(SINGLE_EVENTS_QUERY, { slug });
-  const similarEvents: ISingleEvent[] = await client.fetch(SIMILAR_EVENTS_QUERY, {
-    categoryId: eventData.category._id,
-    slug,
+  // Use your wrapper instead of client.fetch
+  const eventData: ISingleEvent = await sanityFetch({
+    query: SINGLE_EVENTS_QUERY,
+    params: { slug },
+  });
+
+  const similarEvents: ISingleEvent[] = await sanityFetch({
+    query: SIMILAR_EVENTS_QUERY,
+    params: { categoryId: eventData.category._id, slug },
   });
 
   const infoCards = [
