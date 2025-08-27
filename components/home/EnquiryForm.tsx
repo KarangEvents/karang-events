@@ -32,6 +32,7 @@ import {
 import { cn } from "@/lib/utils";
 import { HomeEnquiryformSchema } from "@/lib/schema";
 import { FiSend } from "react-icons/fi";
+import { WHATSAPP_NUMBER } from "@/constants";
 
 export default function EventForm() {
   const form = useForm<z.infer<typeof HomeEnquiryformSchema>>({
@@ -51,19 +52,17 @@ export default function EventForm() {
       const formattedDate =
         date?.from && date?.to
           ? `${format(date.from, "LLL dd, yyyy")} - ${format(
-              date.to,
-              "LLL dd, yyyy"
-            )}`
+            date.to,
+            "LLL dd, yyyy"
+          )}`
           : "N/A";
 
-      const whatsappMessage = `Hello, I have an event enquiry:\n\n Name: ${name}\n Phone: ${phone}\n Event Type: ${eventType}\n Dates: ${formattedDate}\n Message: ${
-        message || "N/A"
-      }`;
+      const whatsappMessage = `Hello, I have an event enquiry:\n\n Name: ${name}\n Phone: ${phone}\n Event Type: ${eventType}\n Dates: ${formattedDate}\n Message: ${message || "N/A"
+        }`;
 
       const encodedMessage = encodeURIComponent(whatsappMessage);
-      const whatsappNumber = "7019872097"; // Change to your number (country code + number)
 
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
       window.open(whatsappUrl, "_blank");
 

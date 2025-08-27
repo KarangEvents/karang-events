@@ -2,40 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, CheckCircle, MapPin, Users } from "lucide-react";
+import { Calendar, CheckCircle, MapPin, Section, Users } from "lucide-react";
 import { LuHandshake } from "react-icons/lu";
 import { MdStarBorderPurple500 } from "react-icons/md";
-import { FaRegLightbulb } from "react-icons/fa6";
+import { FaRegLightbulb, FaWhatsapp } from "react-icons/fa6";
 import { LuHandHeart } from "react-icons/lu";
 import { FaBalanceScale } from "react-icons/fa";
-
-// Sample team data
-const teamMembers = [
-  {
-    name: "Sarah Johnson",
-    role: "CEO & Founder",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "With over 15 years in event management, Sarah founded Karang Events to bring premium experiences to clients.",
-  },
-  {
-    name: "Michael Chen",
-    role: "Chief Operations Officer",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "Michael oversees all operations, ensuring every event meets our high standards of excellence.",
-  },
-  {
-    name: "Jessica Williams",
-    role: "Head of Vendor Relations",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "Jessica works closely with our network of premium vendors to curate exceptional event experiences.",
-  },
-  {
-    name: "David Patel",
-    role: "Customer Experience Director",
-    image: "/placeholder.svg?height=300&width=300",
-    bio: "David ensures every client receives personalized attention and support throughout their journey with us.",
-  },
-];
+import ContactSection from "@/components/common/ContactSection";
+import SectionTitle from "@/components/common/SectionTitle";
+import { TEAM_MEMBERS } from "@/constants";
 
 // Sample values
 const values = [
@@ -91,7 +66,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       {/* Hero Section */}
-      <div className="relative h-[500px] bg-[url('/assets/about-bg.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
+      <div className="relative h-[350px] md:h-[500px] bg-[url('/assets/about-bg.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
         {/* Overlay */}
         {/* <div className="absolute inset-0 bg-[#32174DE5] z-0" /> */}
 
@@ -100,7 +75,7 @@ export default function AboutPage() {
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
               About Karang Events
             </h1>
-            <p className="max-w-3xl mx-auto text-xl text-balance">
+            <p className="max-w-3xl mx-auto text-base md:text-xl text-balance">
               At Karang, we believe that finding the perfect venue should be
               simple, smart, and stress-free. Whether it's a wedding, birthday,
               business meeting, or casual gathering, we help you hunt, compare,
@@ -114,25 +89,25 @@ export default function AboutPage() {
 
       {/* Introduction Section */}
       <section className="section-padding container">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+        <div className="flex flex-col md:flex-row gap-12 items-center">
+          <div className="md:w-[70%] w-full">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-6">
               Our Story
             </h2>
             <p className="text-muted-foreground mb-4">
-              Founded in 2018, Karang Events was born from a passion for
-              creating exceptional event experiences. What began as a small team
-              with big dreams has grown into a premier event management platform
-              connecting clients with top-tier vendors and venues.
+              Three Paths, One Vision
+              Gagan Gowda, Keerthi Nagaraj, and Navya Nagaraj come from unique backgrounds, each bringing their own skills, ideas, and dreams. One shared passion unites them—creating celebrations that last forever.
+              From chai-fueled brainstorming to late-night planning calls, Karang Events is built on friendship and trust.
+              We are driven by passion—crafting perfect atmospheres and curating moments that feel magical.
             </p>
             <p className="text-muted-foreground mb-6">
-              Our journey has been defined by our commitment to excellence,
-              attention to detail, and dedication to turning our clients'
-              visions into reality. From intimate gatherings to grand
-              celebrations, we approach each event with the same level of care
-              and creativity.
+              Every event is crafted with purpose, whether intimate or grand.
+              We put people first, treating your vision as our own and every guest like a friend.
+              From baby showers to milestone celebrations, every detail is handled with care.
+              For us, it’s more than event management—it’s about making memories.
+              Karang Events – Passion in Every Detail, Magic in Every Celebration.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-row gap-4">
               <Link href={"/events"} passHref>
                 <Button className="px-6 py-6">
                   <Calendar className="mr-1 size-4" /> Browse Events
@@ -145,9 +120,9 @@ export default function AboutPage() {
               </Link>
             </div>
           </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
+          <div className="relative hidden md:block md:w-[30%]  h-[400px] rounded-lg overflow-hidden shadow-xl">
             <Image
-              src="/placeholder.svg?height=800&width=600"
+              src="/assets/team.jpeg"
               alt="Karang Events team"
               fill
               className="object-cover"
@@ -158,15 +133,15 @@ export default function AboutPage() {
 
       {/* Mission & Vision Section */}
       <section className="section-padding bg-purple-light/20">
-        <div className="container ">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-6">
+        <div className="container">
+          <div className="mx-auto text-center mb-10">
+            <SectionTitle>
               Mission & Vision
-            </h2>
+            </SectionTitle>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="font-serif text-2xl font-bold text-purple mb-4">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+            <div className="bg-white p-4 md:p-8 rounded-lg shadow-md">
+              <h3 className="font-serif text-xl md:text-2xl font-bold text-purple mb-2 md:mb-4 text-center md:text-left">
                 Our Mission
               </h3>
               <p className="text-muted-foreground">
@@ -175,8 +150,8 @@ export default function AboutPage() {
                 spaces that match user’s purpose, location, and budget.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="font-serif text-2xl font-bold text-gold mb-4">
+            <div className="bg-white p-4 md:p-8 rounded-lg shadow-md">
+              <h3 className="font-serif text-xl md:text-2xl  font-bold text-gold mb-2 md:mb-4 text-center md:text-left">
                 Our Vision
               </h3>
               <p className="text-muted-foreground">
@@ -192,19 +167,19 @@ export default function AboutPage() {
       {/* Values Section */}
       <section className="section-padding">
         <div className="container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-6">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <SectionTitle>
               Our Values
-            </h2>
+            </SectionTitle>
             <p className="text-muted-foreground">
               These core principles guide everything we do at Karang Events.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-lg shadow-md text-center"
+                className="bg-white p-5 md:p-8 rounded-lg shadow-md text-center"
               >
                 <div className="flex justify-center mb-4">{value.icon}</div>
                 <h3 className="font-serif text-xl font-bold text-midnight-dark mb-2">
@@ -223,34 +198,24 @@ export default function AboutPage() {
         className="section-padding bg-gradient-to-b from-white to-purple-light/20"
       >
         <div className="container">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-6">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <SectionTitle>
               Meet Our Team
-            </h2>
+            </SectionTitle>
             <p className="text-muted-foreground">
               The passionate professionals behind Karang Events who work
               tirelessly to bring your events to life.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            {TEAM_MEMBERS.map((member, index) => (
               <Card key={index} className="overflow-hidden card-hover">
-                <div className="relative h-64 w-full">
-                  <Image
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
+                <CardContent className="p-4 md:p-6">
                   <h3 className="font-serif font-bold text-lg mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-sm text-purple mb-3 font-medium">
-                    {member.role}
-                  </p>
-                  <p className="text-sm text-muted-foreground">{member.bio}</p>
+                 
+                  <p className="text-sm text-muted-foreground">{member.bio}</p> 
                 </CardContent>
               </Card>
             ))}
@@ -261,10 +226,10 @@ export default function AboutPage() {
       {/* Why Choose Us Section */}
       <section className="section-padding bg-midnight-dark text-white">
         <div className="container ">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
+          <div className="max-w-3xl mx-auto text-center mb-10">
+            <SectionTitle>
               Why Choose Us?
-            </h2>
+            </SectionTitle>
             <p className="text-gray-300">
               Discover what sets Karang Events apart from other event management
               platforms.
@@ -272,7 +237,7 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {whyChooseUs.map((item, index) => (
-              <div className="bg-midnight p-6 rounded-lg">
+              <div className="bg-midnight p-4 md:p-6 rounded-lg" key={index}>
                 <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center mb-4">
                   {item.icon}
                 </div>
@@ -287,31 +252,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-gradient-to-r from-purple to-purple-dark text-white">
-        <div className="container ">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="text-center md:text-left">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-                Ready to Create Your Perfect Event?
-              </h2>
-              <p className="text-white/90 max-w-xl">
-                Let our team of experts help you design and execute an
-                unforgettable experience tailored to your vision.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/contact" passHref>
-                <Button size="lg">Contact Us</Button>
-              </Link>
-              <Link href="/events" passHref>
-                <Button size="lg" variant={"outline"}>
-                  Browse Events
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
     </div>
   );
 }

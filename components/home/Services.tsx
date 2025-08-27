@@ -1,16 +1,17 @@
 import React from "react";
 import { Card } from "../ui/card";
 import { SERVICE_DATA } from "@/constants";
+import SectionTitle from "../common/SectionTitle";
 
 const Services = () => {
   return (
-    <section className="section-padding bg-white container">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <section className="section-padding bg-white">
+      <div className="container">
+        <div className="text-center mb-10">
+          <SectionTitle>
             Comprehensive Event Solutions
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          </SectionTitle>
+          <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
             From concept to execution, we handle every aspect of your event with
             meticulous attention to detail
           </p>

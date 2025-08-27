@@ -1,13 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetHeader,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import {
   SignInButton,
-  SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
@@ -38,13 +44,13 @@ const NavLinks = ({
 );
 
 const AuthButtons = () => (
-  <div className="hidden md:flex items-center gap-4 justify-end">
+  <div className="flex items-center gap-4">
     <Link href={"/events"}>
-      <IoSearchSharp color="black" className="size-6 mr-2 cursor-pointer" />
+      <IoSearchSharp color="black" className="size-6 cursor-pointer" />
     </Link>
     <SignedOut>
       <SignInButton mode="modal">
-        <Button>Sign In</Button>
+        <Button size="sm">Sign In</Button>
       </SignInButton>
     </SignedOut>
     <SignedIn>
@@ -54,23 +60,13 @@ const AuthButtons = () => (
 );
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false); // ✅ control sheet
 
-  // Handle scroll effect for sticky header
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -80,67 +76,61 @@ export default function Header() {
         scrolled ? "bg-background/95 shadow-md" : "bg-background/95"
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/">
-          <Image
-            src="/assets/logo-black.png"
-            alt="Logo"
-            width={60}
-            height={60}
-            className="object-contain rounded-full"
-          />
-        </Link>
+      <div className="container relative flex h-18 items-center justify-between">
+        {/* Left side: Logo + Hamburger (mobile only) */}
+        <div className="flex items-center gap-2">
+          {/* Hamburger (mobile only) */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <button className="flex lg:hidden" aria-label="Open Menu">
+                <Menu className="h-6 w-6" />
+              </button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-64 sm:w-80">
+              <SheetHeader>
+                <SheetTitle>
+                  <Image
+                    src="/assets/logo-black.png"
+                    alt="Logo"
+                    width={60}
+                    height={40}
+                    className="object-contain -mt-4"
+                  />
+                </SheetTitle>
+              </SheetHeader>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          <NavLinks className="text-base font-semibold text-muted-foreground transition-colors hover:text-foreground !tracking-normal" />
+              {/* Mobile Nav */}
+              <div className="flex flex-col space-y-4 mt-6">
+                <NavLinks
+                  onClick={() => setOpen(false)} // ✅ close sheet on click
+                  className="text-lg font-medium hover:text-primary px-2 py-1"
+                />
+              </div>
+
+             
+            </SheetContent>
+          </Sheet>
+
+          {/* Logo (always visible) */}
+          <Link href="/">
+            <Image
+              src="/assets/logo-black.png"
+              alt="Logo"
+              width={70}
+              height={70}
+              className="object-contain"
+            />
+          </Link>
+        </div>
+
+        {/* Center Nav (desktop only, absolutely centered) */}
+        <nav className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8">
+          <NavLinks className="text-base font-semibold text-gray-600 transition-colors hover:text-primary p-2 !tracking-normal" />
         </nav>
 
-        {/* Auth */}
-        <AuthButtons />
-
-        {/* Mobile Menu Button */}
-        <button
-          className="flex md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile Nav */}
-      <div
-        className={cn(
-          "fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in md:hidden bg-background",
-          isMenuOpen ? "fade-in-0" : "hidden"
-        )}
-      >
-        <div className="flex flex-col space-y-4">
-          <NavLinks
-            onClick={() => setIsMenuOpen(false)}
-            className="text-lg font-medium hover:text-primary"
-          />
-
-          <div className="pt-4 flex flex-col gap-2">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <Button variant="outline" className="w-full justify-start">
-                  Sign In
-                </Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <Button className="w-full justify-start">Sign Up</Button>
-              </SignUpButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </div>
+        {/* Right side: Auth */}
+        <div className="flex items-center gap-2">
+          <AuthButtons />
         </div>
       </div>
     </header>

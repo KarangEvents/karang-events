@@ -4,11 +4,11 @@ import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
-    <section className="relative h-[90vh] flex place-content-center bg-[url('/assets/Hero-Gradient.png')] bg-cover bg-center">
+    <section className="relative h-[400px] md:h-[90vh] flex place-content-center bg-[url('/assets/Hero-Gradient.png')] bg-cover bg-center">
       {/* Overlay to darken the image */}
 
-      <div className="container-custom relative z-10 my-auto">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="relative z-10 my-auto">
+        <div className="text-center max-w-4xl mx-auto px-4">
           <p className="text-lg mb-4 animate-fade-in">
             Welcome to Karang Events
           </p>

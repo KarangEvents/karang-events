@@ -29,8 +29,8 @@ interface IBase {
   slug: string;
 }
 
-export interface ICategory extends IBase {}
-export interface IArea extends IBase {}
+export interface ICategory extends IBase { }
+export interface IArea extends IBase { }
 
 export interface ISingleEvent {
   _id: string;
@@ -49,7 +49,7 @@ export interface ISingleEvent {
   rating: number;
   reviews: Review[];
   shortDescription: string;
-  slug: Slug;
+  slug: string;
   title: string;
   whatsIncluded: string[];
 }
@@ -82,7 +82,17 @@ interface Review {
   reviewDate: string;
 }
 
-interface Slug {
-  _type: string;
-  current: string;
+export interface IReview {
+  _id: string;
+  reviewerName: string;
+  reviewerRole: string;
+  rating: number;
+  reviewText: string;
+}
+
+export interface ISuccessStory {
+  _id: string;
+  category: string;
+  eventName: string;
+  picture: string;
 }

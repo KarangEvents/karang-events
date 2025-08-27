@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
+import { cn, handleCustomMessage } from "@/lib/utils";
 import {
   Form,
   FormControl,
@@ -62,19 +62,42 @@ const EnquiryModal: React.FC<EnquiryModalProps> = ({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      console.log(values);
-      setEnquirySubmitted(true);
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
+function onSubmit(values: z.infer<typeof formSchema>) {
+  try {
+    const message = `Hi, I am ${values.name}.\n I would like to enquiry about the event on ${format(values.date, 'PPPP')}.\n I would like to invite ${values.guestCount} guests. ${values.message}`;
+
+    handleCustomMessage(message);
+
+    setEnquirySubmitted(true);
+    toast.success("Enquiry submitted successfully!");
+
+    // Clear form fields
+    form.reset({
+      name: "",
+      email: "",
+      phone: "",
+      guestCount: "",
+      date: new Date(),
+      message: "",
+    });
+
+    // Close modal after a short delay
+    setTimeout(() => {
+      setEnquiryFormOpen(false);
+      setEnquirySubmitted(false);
+    }, 1500);
+
+  } catch (error) {
+    console.error("Form submission error", error);
+    toast.error("Failed to submit the form. Please try again.");
   }
+}
+
 
   return (
     <Dialog open={enquiryFormOpen} onOpenChange={setEnquiryFormOpen}>
-      <DialogContent>
+      <DialogContent className="max-w-sm md:max-w-lg"> 
+
         {!enquirySubmitted ? (
           <>
             <DialogHeader>
@@ -89,7 +112,7 @@ const EnquiryModal: React.FC<EnquiryModalProps> = ({
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6 mx-auto w-full"
+                className="space-y-3 mx-auto w-full"
               >
                 <div className="grid grid-cols-12 gap-4 items-end">
                   <div className="col-span-6">
@@ -236,7 +259,8 @@ const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type="submit" className="w-full">Submit</Button>
+
               </form>
             </Form>
           </>

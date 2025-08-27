@@ -28,7 +28,7 @@ const BottomSection = () => {
         onClick={openWhatsApp}
         size="sm"
       >
-        <FaWhatsapp className="mr-2" />
+        <FaWhatsapp />
         Contact on WhatsApp
       </Button>
     </div>

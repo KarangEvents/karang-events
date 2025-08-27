@@ -2,27 +2,28 @@ import React from "react";
 import { Card } from "../ui/card";
 import EventForm from "./EnquiryForm";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import SectionTitle from "../common/SectionTitle";
 
 const Contact = () => {
   return (
-    <section className="relative bg-[url('/assets/enquiry-bg.jpg')] bg-cover bg-center section-padding">
+    <section id="contact-section" className="relative bg-[url('/assets/enquiry-bg.jpg')] bg-cover bg-center section-padding">
       {/* Overlay */}
       <div className="absolute inset-0 bg-[#32174D]/90 z-0" />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="flex items-center justify-between gap-16">
           {/* Left: Info Section */}
           <div className="text-white animate-slide-in w-full lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Contact us</h2>
-            <p className="text-lg leading-relaxed mb-10 max-w-md">
+            <SectionTitle>Contact us</SectionTitle>
+            <p className="text-base md:text-lg leading-relaxed mb-6 md:mb-10 max-w-md">
               Tell us a bit about your event and we'll get back to you with
               ideas, packages and next steps to make your celebration
               unforgettable.
             </p>
 
             {/* Info Grid */}
-            <div className="grid md:grid-cols-2 gap-x-6 gap-y-8 mt-10">
+            <div className="grid md:grid-cols-2 gap-x-6 gap-y-6 md:gap-y-8 mt-10">
               {[
                 {
                   icon: MapPin,
@@ -49,7 +50,7 @@ const Contact = () => {
               ].map((item, idx) => (
                 <div key={idx} className="space-y-2">
                   <div className="flex items-center">
-                    <div className="size-8 rounded-full border-2  flex items-center justify-center mr-3">
+                    <div className="size-8 bg-white text-black rounded-full flex items-center justify-center mr-3">
                       <item.icon className="size-4" />
                     </div>
                     <h3 className="text-xl font-semibold">{item.title}</h3>
@@ -63,7 +64,7 @@ const Contact = () => {
           </div>
 
           {/* Right: Form Section */}
-          <div className="w-full lg:w-[40%] animate-fade-in">
+          <div className="w-full lg:w-[40%] animate-fade-in max-md:hidden">
             <Card className="bg-white/90 backdrop-blur-md shadow-lg border border-purple-200 p-6 hover:shadow-xl transition-shadow duration-300">
               <h3 className="text-2xl font-semibold mb-6 text-purple-800">
                 Get in Touch

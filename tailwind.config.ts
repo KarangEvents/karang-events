@@ -13,10 +13,20 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "5rem",
-      screens: {
-        "2xl": "1400px",
+      padding: {
+        DEFAULT: "1rem", // mobile
+        sm: "2rem",      // >= 640px
+        lg: "3rem",      // >= 1024px
+        xl: "4rem",      // >= 1280px
+        "2xl": "5rem",   // >= 1536px
       },
+      screens: {
+        sm: "640px",   // small devices (≥ 640px)
+        md: "768px",   // medium devices (≥ 768px)
+        lg: "1024px",  // large devices (≥ 1024px)
+        xl: "1280px",  // extra-large devices (≥ 1280px)
+        "2xl": "1536px" // double extra-large (≥ 1536px)
+      }
     },
     extend: {
       colors: {

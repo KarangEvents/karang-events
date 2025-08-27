@@ -5,8 +5,30 @@ import FeaturedEvents from "@/components/home/FeaturedEvents";
 import Services from "@/components/home/Services";
 import Testimonials from "@/components/home/Testimonials";
 import SuccessStories from "@/components/home/SuccessStories";
+import { client } from "@/sanity/client";
 
-export default function HomePage() {
+const REVIEWS_QUERY = `*[_type == "homeReview"] | order(_createdAt desc) {
+  _id,
+  reviewerName,
+  reviewerRole,
+  rating,
+  reviewText
+}`;
+
+const SUCCESS_STORIES_QUERY = `*[_type == "successStory"] | order(_createdAt desc) {
+  _id,
+  eventName,
+  "category": category->name,
+  "picture": picture.asset->url
+}`;
+
+
+const options = { next: { revalidate: 300 } };
+
+export default async function HomePage() {
+  const reviews = await client.fetch(REVIEWS_QUERY, {}, options)
+  const successStories = await client.fetch(SUCCESS_STORIES_QUERY, {}, options)  
+
   return (
     <>
       {/* Hero Section */}
@@ -20,9 +42,12 @@ export default function HomePage() {
       {/* Services Section */}
       <Services />
       {/* Testimonials Section */}
-      <Testimonials />
+      <Testimonials reviews={reviews}/>
       {/* Success Stories Section */}
-      <SuccessStories />
+      <SuccessStories 
+        successStories={successStories}
+      />
     </>
   );
 }
+

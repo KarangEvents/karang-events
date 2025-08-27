@@ -13,11 +13,39 @@ import { Smartphone } from "lucide-react";
 import RightColumn from "@/components/payment/RightColumn";
 import BottomSection from "@/components/payment/BottomSection";
 import { WHATSAPP_NUMBER } from "@/constants";
+import { ISingleEvent } from "@/types";
+import { client } from "@/sanity/client";
+import { urlFor } from "@/sanity/SanityImageUrl";
+import { SanityImageObject } from "@sanity/image-url/lib/types/types";
 
-export default function PaymentPage() {
-  const booking = true;
+const SINGLE_EVENTS_QUERY = `*[_type == "event" && slug.current == $slug][0]{
+  _id,
+  _type,
+  title,
+  image,
+  location,
+  area->{
+    _id,
+    name
+  },
+  price,
+  originalPriceAmount,
+}`;
 
-  if (!booking) {
+
+type Params = Promise<{ slug: string }>;
+
+
+export default async function PaymentPage({ params }: { params: Params }) {
+
+
+  const { slug } = await params;
+
+  const eventData: ISingleEvent = await client.fetch(SINGLE_EVENTS_QUERY, {
+    slug,
+  });
+
+  if (!eventData) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-purple-light/20 to-white p-4">
         <Card className="w-full max-w-md shadow-lg">
@@ -59,7 +87,7 @@ export default function PaymentPage() {
         <Card className="shadow-lg animate-fade-in">
           <CardHeader className="bg-gradient-to-r from-purple to-purple-dark text-white text-center py-4">
             <CardTitle className="text-xl font-serif">
-              Payment Required : <span className="text-white ml-1">₹ 100</span>
+              Payment Required : <span className="text-white ml-1">₹ {eventData.price}</span>
             </CardTitle>
           </CardHeader>
 
@@ -70,31 +98,36 @@ export default function PaymentPage() {
                 <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
                   <div className="relative h-12 w-12 rounded-md overflow-hidden flex-shrink-0">
                     <Image
-                      src={"/placeholder.svg"}
+                      src={urlFor(eventData.image as SanityImageObject).url()}
                       alt={"Event Image"}
                       fill
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="font-serif font-bold text-sm">Event Name</h3>
+                  <h3 className="font-serif font-bold text-sm md:text-base">
+                    {eventData.title}
+
+                  </h3>
                 </div>
 
                 {/* Payment Summary */}
                 <div className="bg-muted/50 p-3 rounded-lg">
                   <h4 className="font-medium text-sm mb-2">Payment Summary</h4>
-                  <div className="space-y-1 text-xs">
+                  <div className="space-y-2 text-xs md:text-sm">
                     <div className="flex justify-between">
                       <span>Event Price:</span>
-                      <span>₹ 100</span>
+                      <span>₹ {eventData.originalPriceAmount}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Booking Fee:</span>
-                      <span>₹ 0</span>
+                      <span> Discount:</span>
+                      <span>₹ {
+                        Number(eventData.originalPriceAmount) - Number(eventData.price)
+                      }</span>
                     </div>
                     <Separator className="my-1" />
                     <div className="flex justify-between font-medium text-purple-dark">
                       <span>Total:</span>
-                      <span>₹ 100</span>
+                      <span>₹ {eventData.price}</span>
                     </div>
                   </div>
                 </div>
@@ -102,9 +135,9 @@ export default function PaymentPage() {
 
               {/* Center Column - QR Code */}
               <div className="flex flex-col items-center justify-center">
-                <div className="relative h-48 w-48 border-2 border-purple rounded-lg p-2 mb-3 transition-all duration-300 hover:shadow-lg">
+                <div className="relative size-48 rounded-lg p-2 mb-3 shadow-xl">
                   <Image
-                    src="/placeholder.svg?height=192&width=192"
+                    src="/assets/qr.jpeg"
                     alt="Payment QR Code"
                     fill
                     className="object-contain rounded"
@@ -113,8 +146,8 @@ export default function PaymentPage() {
                 <p className="text-xs text-center text-muted-foreground mb-2">
                   Scan with any UPI app
                 </p>
-                <p className="text-purple font-medium text-sm mb-2">
-                  <span className="text-black">UPI ID:</span> karangevents@upi
+                <p className="text-primary font-medium text-sm mb-2">
+                  <span className="text-black">UPI ID:</span> 9108496207@hdfc
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Smartphone className="h-3 w-3" />
@@ -123,7 +156,8 @@ export default function PaymentPage() {
               </div>
 
               {/* Right Column - Instructions & WhatsApp */}
-              <RightColumn amount={100} />
+              <RightColumn amount={Number(eventData.price)} />
+
             </div>
 
             {/* Bottom Actions */}
@@ -135,11 +169,11 @@ export default function PaymentPage() {
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground">
             Need help? Contact us at{" "}
-            <Link href="/contact" className="text-purple hover:underline">
+            <Link href="/contact" className="text-primary hover:underline">
               Karangevents@gmail.com
             </Link>{" "}
             or call{" "}
-            <a href="tel:+1234567890" className="text-purple hover:underline">
+            <a href="tel:+1234567890" className="text-primary hover:underline">
               +91 {WHATSAPP_NUMBER}
             </a>
           </p>

@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { client } from "@/sanity/client";
 import { IEvent } from "@/types";
 import { urlFor } from "@/sanity/SanityImageUrl";
+import SectionTitle from "../common/SectionTitle";
 
 const EVENTS_QUERY = `*[_type == "event" && featured == true]{
   _id,
@@ -31,14 +32,14 @@ const options = { next: { revalidate: 30 } };
 const FeaturedEvents = async () => {
   const featured: IEvent[] = await client.fetch(EVENTS_QUERY, {}, options);
   return (
-    <section className="section-padding bg-gray-50 container">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+    <section className="section-padding bg-gray-50">
+      <div className="container">
+        <div className="text-center mb-6 md:mb-12">
+          <SectionTitle>
             Featured Events
-          </h2>
+          </SectionTitle>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featured.map((event) => (
             <Link href={`/events/${event.slug}`} key={event._id} passHref>
               <Card className="cursor-pointer bg-transparent shadow-none !border-0 group">
@@ -62,7 +63,7 @@ const FeaturedEvents = async () => {
             </Link>
           ))}
         </div>
-        <div className="text-center">
+        <div className="text-center mt-12">
           <Link href="/events" passHref>
             <Button className="px-8 py-7 text-base">View More</Button>
           </Link>

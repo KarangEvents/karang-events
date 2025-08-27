@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -9,8 +8,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { FAQ_CATEGORIES } from "@/constants";
+import { FaWhatsapp } from "react-icons/fa6";
+import { handleContactCTA } from "@/lib/utils";
 
 export default function FAQPage() {
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       <div className="section-padding relative  bg-[url('/assets/faq-bg.jpg')] bg-cover bg-center bg-no-repeat">
@@ -19,7 +21,7 @@ export default function FAQPage() {
 
         <div className="z-10 relative container text-white">
           <div className="text-center">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               Frequently Asked Questions
             </h1>
             <p className="max-w-2xl mx-auto">
@@ -66,14 +68,14 @@ export default function FAQPage() {
             Our support team is here to help. Reach out to us and we'll get back
             to you as soon as possible.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/contact">
-              <Button className="bg-purple hover:bg-purple-dark">
-                Contact Support
-              </Button>
-            </Link>
-            <Button variant="outline">Live Chat</Button>
-          </div>
+          <Button
+            className="bg-green-600 hover:bg-green-700 text-white"
+            onClick={handleContactCTA}
+            size="sm"
+          >
+            <FaWhatsapp />
+            Contact on WhatsApp
+          </Button>
         </div>
       </div>
     </div>

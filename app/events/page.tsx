@@ -67,11 +67,11 @@ export default async function EventsPage({
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
-      <div className="container  py-8 md:py-12">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white py-6 md:py-12">
+      <div className="container">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-8">
           <div>
-            <h1 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-2">
+            <h1 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-midnight-dark mb-2">
               Discover Events
             </h1>
             <p className="text-muted-foreground">

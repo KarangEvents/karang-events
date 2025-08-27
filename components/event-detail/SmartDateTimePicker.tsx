@@ -6,13 +6,12 @@ import { CalendarIcon, MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
+import { cn, handleCustomMessage } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,6 +24,9 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
+import { ISingleEvent } from "@/types";
+import { LuSend } from "react-icons/lu";
+
 
 // Schema
 const FormSchema = z.object({
@@ -36,11 +38,11 @@ const FormSchema = z.object({
     .max(500, "Too many attendees"),
 });
 
-export function DatePickerForm() {
+export function DatePickerForm({ eventData }: { eventData: ISingleEvent }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      time: "10:30:00",
+      time: "10:00:00",
       attendees: 1,
     },
   });
@@ -74,20 +76,17 @@ export function DatePickerForm() {
       return;
     }
 
-    toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    const message = `Hi need assistance on this ${eventData.title}\n on ${combined} for ${data.attendees} `
+
+    handleCustomMessage(message)
+
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         {/* Date + Time */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex gap-2 md:gap-4">
           {/* Date Picker */}
           <FormField
             control={form.control}
@@ -177,9 +176,10 @@ export function DatePickerForm() {
         <Button
           type="submit"
           variant="outline"
-          className="w-full h-12 bg-transparent"
+          className="w-full text-base"
+          size={"lg"}
         >
-          <MessageCircle className="size-4" />
+          <LuSend size={5} />
           Send Enquiry
         </Button>
       </form>
