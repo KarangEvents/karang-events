@@ -44,13 +44,13 @@ const NavLinks = ({
 );
 
 const AuthButtons = () => (
-  <div className="flex items-center gap-6">
+  <div className="flex items-center gap-5 md:gap-6">
     <Link href={"/events"}>
       <IoSearchSharp color="black" className="size-6 cursor-pointer" />
     </Link>
     <SignedOut>
       <SignInButton mode="modal">
-        <Button size="sm">Sign In</Button>
+        <Button size="sm" className="px-4 max-sm:py-5 md:px-8">Sign In</Button>
       </SignInButton>
     </SignedOut>
     <SignedIn>

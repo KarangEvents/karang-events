@@ -36,7 +36,7 @@ const About = () => {
                   src="/assets/home_about.png"
                   alt="Event presentation"
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <div className="text-center">
