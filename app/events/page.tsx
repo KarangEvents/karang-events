@@ -67,7 +67,7 @@ export default async function EventsPage({
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white py-6 md:py-12">
+    <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white py-6 md:pt-12 md:pb-20">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-8">
           <div>
