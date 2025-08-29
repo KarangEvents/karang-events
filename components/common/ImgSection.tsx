@@ -22,7 +22,7 @@ export default function ImgSection({
   as: HeadingTag = "h1",
 }: HeroProps) {
   return (
-    <section className="relative min-h-[350px] md:h-[70vh] w-full flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[350px] md:h-[450px] max-w-screen-2xl mx-auto w-full flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       {backgroundImage && (
         <div className="absolute inset-0">
