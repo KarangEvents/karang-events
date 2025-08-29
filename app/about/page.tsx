@@ -12,6 +12,7 @@ import ContactSection from "@/components/common/ContactSection";
 import SectionTitle from "@/components/common/SectionTitle";
 import { TEAM_MEMBERS } from "@/constants";
 import type { Metadata } from "next";
+import ImgSection from "@/components/common/ImgSection";
 
 // Sample values
 const values = [
@@ -72,34 +73,21 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       {/* Hero Section */}
-      <div className="relative h-[350px] md:h-[500px] bg-[url('/assets/about-bg.jpg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
-        {/* Overlay */}
-        {/* <div className="absolute inset-0 bg-[#32174DE5] z-0" /> */}
-
-        <div className="z-10 relative container text-white">
-          <div className="text-center">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
-              About Karang Events
-            </h1>
-            <p className="max-w-3xl mx-auto text-base md:text-xl text-balance">
-              At Karang, we believe that finding the perfect venue should be
-              simple, smart, and stress-free. Whether it's a wedding, birthday,
-              business meeting, or casual gathering, we help you hunt, compare,
-              and book the ideal venue—right around you. Our easy-to-use
-              platform which offer reliable options, transparent pricing, and a
-              smooth booking experience—all in one place.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ImgSection
+        title="About Karang Events"
+        subtitle="At Karang, we make finding the perfect venue simple and stress-free. From weddings to business meetings, our platform helps you compare, book, and celebrate—quickly and with confidence."
+        buttonText="Meet Our Team"
+        buttonHref="/about#team"
+        backgroundImage="/assets/about-bg.jpg"
+      />
 
       {/* Introduction Section */}
       <section className="section-padding container">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="md:w-[70%] w-full">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-6">
+            <SectionTitle>
               Our Story
-            </h2>
+            </SectionTitle>
             <p className="text-muted-foreground mb-4">
               Three Paths, One Vision
               Gagan Gowda, Keerthi Nagaraj, and Navya Nagaraj come from unique backgrounds, each bringing their own skills, ideas, and dreams. One shared passion unites them—creating celebrations that last forever.
@@ -113,18 +101,11 @@ export default function AboutPage() {
               For us, it’s more than event management—it’s about making memories.
               Karang Events – Passion in Every Detail, Magic in Every Celebration.
             </p>
-            <div className="flex flex-row gap-4">
-              <Link href={"/events"} passHref>
-                <Button className="px-6 py-6">
-                  <Calendar className="mr-1 size-4" /> Browse Events
-                </Button>
-              </Link>
-              <Link href={"/about#team"} passHref>
-                <Button variant="outline" className="px-6 py-6">
-                  <Users className="mr-1 size-4" /> Meet Our Team
-                </Button>
-              </Link>
-            </div>
+            <Link href={"/events"} passHref>
+              <Button className="px-6 py-6">
+                <Calendar className="mr-1 size-4" /> Browse Events
+              </Button>
+            </Link>
           </div>
           <div className="relative hidden md:block md:w-[30%]  h-[400px] rounded-lg overflow-hidden shadow-xl">
             <Image
@@ -220,8 +201,8 @@ export default function AboutPage() {
                   <h3 className="font-serif font-bold text-lg mb-1">
                     {member.name}
                   </h3>
-                 
-                  <p className="text-sm text-muted-foreground">{member.bio}</p> 
+
+                  <p className="text-sm text-muted-foreground">{member.bio}</p>
                 </CardContent>
               </Card>
             ))}

@@ -10,7 +10,6 @@ const About = () => {
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-2 md:gap-12 items-center">
           <div className="animate-slide-in max-lg:order-2">
-
             <SectionTitle className="max-lg:hidden">
               About Us
             </SectionTitle>
@@ -28,10 +27,8 @@ const About = () => {
           </div>
           </div>
           <div className="relative animate-fade-in max-lg:order-1">
-
-            <div className="card-modern p-6 md:p-8">
-              <div className="relative h-[400px] mb-6 rounded-xl overflow-hidden">
-
+            <div className="p-4">
+              <div className="relative h-[400px] mb-2 md:mb-6 rounded-xl overflow-hidden">
                 <Image
                   src="/assets/home_about.png"
                   alt="Event presentation"

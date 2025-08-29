@@ -7,6 +7,9 @@ import {
 import { FAQ_CATEGORIES } from "@/constants";
 import { Metadata } from "next";
 import StillQuestions from "@/components/faq/StillQuestions";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import ImgSection from "@/components/common/ImgSection";
 
 export const metadata: Metadata = {
   title: 'FAQ | Karang Events',
@@ -16,26 +19,20 @@ export const metadata: Metadata = {
 export default function FAQPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
-      <div className="section-padding relative  bg-[url('/assets/faq-bg.jpg')] bg-cover bg-center bg-no-repeat">
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-[#32174DE5] z-0" />
+    
 
-        <div className="z-10 relative container text-white">
-          <div className="text-center">
-            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Frequently Asked Questions
-            </h1>
-            <p className="max-w-2xl mx-auto">
-              Find answers to common questions about Karang Events, our
-              services, and how we can help you create unforgettable events.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ImgSection
+        title="Frequently Asked Questions"
+        subtitle="Find answers to common questions about Karang Events, our services, and how we can help you create unforgettable events."
+        buttonText="View FAQs"
+        buttonHref="/faq#faqs"
+        backgroundImage="/assets/faq-bg.jpg"
+        overlay="bg-[#32174DE5]"
+      />
 
       <div className="container px-4 md:px-6 py-12 md:py-16">
         {/* FAQ Accordions */}
-        <div className="max-w-3xl mx-auto space-y-8">
+        <div className="max-w-3xl mx-auto space-y-8" id="faqs">
           {FAQ_CATEGORIES.map((category, index) => (
             <div key={index} className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="font-serif text-xl font-bold text-primary mb-4">

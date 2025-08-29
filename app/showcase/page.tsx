@@ -7,19 +7,17 @@ import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { SOCIAL_LINKS } from "@/constants";
 import { Metadata } from "next";
-
+import ImgSection from "@/components/common/ImgSection";
 
 const SHOWCASE_QUERY = `*[_type == "showcase"]{
   _id,
   instagramUrl,
 }`;
 
-
 export const metadata: Metadata = {
   title: 'Showcase | Karang Events',
   description: "Explore the creative side of Karang Events with our showcase. See our past events, client testimonials, and the magic we've created.",
 }
-
 
 export default async function ShowcasePage() {
 
@@ -28,36 +26,15 @@ export default async function ShowcasePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[400px] w-full flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/assets/showcase-bg.jpg"
-            alt="Showcase hero"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-midnight/80 via-purple-dark/70 to-purple/60"></div>
-        </div>
 
-        {/* Video Play Button Overlay */}
-        <div className="container relative z-10 px-4 md:px-6 flex flex-col items-center text-center text-white">
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl animate-fade-in">
-            Our Work Speaks for Itself
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-100">
-            Discover the magic we create through our portfolio of exceptional events, from intimate celebrations to
-            grand corporate gatherings.
-          </p>
-          <Link href={"/showcase#insta"}>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent">
-              Watch Highlight Reel
-            </Button>
-
-          </Link>
-        </div>
-      </section>
-
+        <ImgSection
+          title="Our Work Speaks for Itself"
+          subtitle="Discover the magic we create through our portfolio of exceptional events, from intimate celebrations to grand corporate gatherings."
+          buttonText="Watch Highlight Reel"
+          buttonHref="/showcase#insta"
+          backgroundImage="/assets/showcase-bg.jpg"
+          overlay="bg-gradient-to-r from-midnight/80 via-purple-dark/70 to-purple/60"
+        />
 
 
       {/* Instagram Feed Section */}
