@@ -3,11 +3,16 @@ import HeroSlider from "@/components/event-detail/HeroSlider";
 import StickyRightBar from "@/components/event-detail/StickyRightBar";
 import { Card } from "@/components/ui/card";
 import Reviews from "@/components/event-detail/Reviews";
-import { client, sanityFetch } from "@/sanity/client";
+import { sanityFetch } from "@/sanity/client";
 import { ISingleEvent } from "@/types";
 import SimilarEventCard from "@/components/event-detail/SimilarEventCard";
 import InfoCard from "@/components/event-detail/InfoCard";
 import { Metadata } from "next";
+
+
+const ALL_EVENTS_QUERY = `*[_type == "event"]{
+  "slug": slug.current
+}`;
 
 const SINGLE_EVENTS_QUERY = `*[_type == "event" && slug.current == $slug][0]{
   _id,
@@ -36,6 +41,18 @@ const SIMILAR_EVENTS_QUERY = `*[_type == "event" && category._ref == $categoryId
 }`;
 
 type Params = Promise<{ slug: string }>;
+
+
+// 👇 This runs at build time to generate static paths
+export async function generateStaticParams() {
+  const events: { slug: string }[] = await sanityFetch({
+    query: ALL_EVENTS_QUERY,
+  });
+
+  return events.map((event) => ({
+    slug: event.slug,
+  }));
+}
 
 // ✅ Dynamic SEO metadata per event
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
