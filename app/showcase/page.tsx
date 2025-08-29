@@ -24,7 +24,7 @@ export default async function ShowcasePage() {
   const links = await sanityFetch({ query: SHOWCASE_QUERY })
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
+    <div className="min-h-screen bg-purple-light/20">
       {/* Hero Section */}
 
         <ImgSection
@@ -38,7 +38,7 @@ export default async function ShowcasePage() {
 
 
       {/* Instagram Feed Section */}
-      <section className="section-padding bg-purple-light/20" id="insta">
+      <section className="section-padding " id="insta">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-midnight-dark mb-4">Follow Our Journey</h2>
