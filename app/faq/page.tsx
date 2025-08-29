@@ -10,9 +10,14 @@ import {
 import { FAQ_CATEGORIES } from "@/constants";
 import { FaWhatsapp } from "react-icons/fa6";
 import { handleContactCTA } from "@/lib/utils";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'FAQ | Karang Events',
+  description: "Find answers to common questions about Karang Events, our services, and how we can help you create unforgettable events.",
+}
 
 export default function FAQPage() {
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-light/20 to-white">
       <div className="section-padding relative  bg-[url('/assets/faq-bg.jpg')] bg-cover bg-center bg-no-repeat">

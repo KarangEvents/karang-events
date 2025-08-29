@@ -3,6 +3,7 @@ import SearchWithFilter from "@/components/events/SearchWithFilter";
 import EventsList from "@/components/events/EventsList";
 import { sanityFetch } from "@/sanity/client";
 import { IEvent, ICategory, IArea } from "@/types";
+import { Metadata } from "next";
 
 const EVENTS_QUERY = `*[_type == "event"]{
   _id,
@@ -30,7 +31,10 @@ const AREAS_QUERY = `*[_type == "area"]{
   "slug": slug.current,
 } | order(name asc)`;
 
-const options = { next: { revalidate: 300 } };
+export const metadata: Metadata = {
+  title: 'Events | Karang Events',
+  description: "Book events in Bangalore with Karang Events. From concerts to workshops, explore the best experiences across the city.",
+}
 
 export default async function EventsPage({
   searchParams,

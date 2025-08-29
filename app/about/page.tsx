@@ -11,6 +11,7 @@ import { FaBalanceScale } from "react-icons/fa";
 import ContactSection from "@/components/common/ContactSection";
 import SectionTitle from "@/components/common/SectionTitle";
 import { TEAM_MEMBERS } from "@/constants";
+import type { Metadata } from "next";
 
 // Sample values
 const values = [
@@ -61,6 +62,11 @@ const whyChooseUs = [
     icon: <MapPin className="size-6 text-purple" />,
   },
 ];
+
+export const metadata: Metadata = {
+  title: 'About | Karang Events',
+  description: "Karang helps you find and book the perfect venue in Bangalore. From weddings to meetings, enjoy reliable options and transparent pricing."
+}
 
 export default function AboutPage() {
   return (

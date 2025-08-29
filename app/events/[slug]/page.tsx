@@ -7,6 +7,7 @@ import { client, sanityFetch } from "@/sanity/client";
 import { ISingleEvent } from "@/types";
 import SimilarEventCard from "@/components/event-detail/SimilarEventCard";
 import InfoCard from "@/components/event-detail/InfoCard";
+import { Metadata } from "next";
 
 const SINGLE_EVENTS_QUERY = `*[_type == "event" && slug.current == $slug][0]{
   _id,
@@ -36,6 +37,29 @@ const SIMILAR_EVENTS_QUERY = `*[_type == "event" && category._ref == $categoryId
 
 type Params = Promise<{ slug: string }>;
 
+// ✅ Dynamic SEO metadata per event
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { slug } = await params;
+
+  const eventData: ISingleEvent = await sanityFetch({
+    query: SINGLE_EVENTS_QUERY,
+    params: { slug },
+  });
+
+  if (!eventData) {
+    return {
+      title: "Event Not Found | Karang Events",
+      description: "The event you are looking for could not be found.",
+    };
+  }
+
+  return {
+    title: `${eventData.title} | Karang Events`,
+    description:
+      eventData.shortDescription ||
+      `Book ${eventData.title} in Bangalore with Karang Events. Explore top events, concerts, and workshops across the city.`,
+  };
+}
 
 export default async function EventDetailPage({ params }: { params: Params }) {
   const { slug } = await params;

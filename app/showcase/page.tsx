@@ -1,11 +1,12 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import InstaGrids from "@/components/showcase/InstaGrids"
-import { client, sanityFetch } from "@/sanity/client";
+import {  sanityFetch } from "@/sanity/client";
 import ContactSection from "@/components/common/ContactSection";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
 import { SOCIAL_LINKS } from "@/constants";
+import { Metadata } from "next";
 
 
 const SHOWCASE_QUERY = `*[_type == "showcase"]{
@@ -13,6 +14,11 @@ const SHOWCASE_QUERY = `*[_type == "showcase"]{
   instagramUrl,
 }`;
 
+
+export const metadata: Metadata = {
+  title: 'Showcase | Karang Events',
+  description: "Explore the creative side of Karang Events with our showcase. See our past events, client testimonials, and the magic we've created.",
+}
 
 
 export default async function ShowcasePage() {

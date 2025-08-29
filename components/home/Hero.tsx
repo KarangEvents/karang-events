@@ -6,7 +6,6 @@ const Hero = () => {
   return (
     <section className="relative h-[400px] md:h-[90vh] flex place-content-center bg-[url('/assets/hero.png')] bg-cover bg-center">
       {/* Overlay to darken the image */}
-
       <div className="relative z-10 my-auto">
         <div className="text-center flex flex-col items-center justify-center md:max-w-2xl mx-auto px-4">
           <p className="text-lg md:text-xl mb-4 animate-fade-in">
